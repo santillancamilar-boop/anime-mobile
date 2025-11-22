@@ -1,0 +1,29 @@
+WEBVTT
+
+00:00:07.000 --> 00:00:09.000
+孫悟飯 (Son Gohan)
+"Son Gohan."
+
+00:00:12.000 --> 00:00:14.000
+正しいことのために (Tadashii koto no tame ni)
+"Por el bien de lo correcto."
+
+00:00:15.000 --> 00:00:16.000
+戦うことは罪ではない (Tatakau koto wa tsumi de wa nai)
+"Pelear no es un pecado."
+
+00:00:17.000 --> 00:00:18.000
+話し合いなど (Hanashiai nado)
+"El diálogo y esas cosas..."
+
+00:00:19.000 --> 00:00:21.000
+通用しない相手もいるのだ (Tsūyō shinai aite mo iru noda)
+"También hay oponentes con los que eso no funciona."
+
+00:00:23.000 --> 00:00:26.000
+精神を光のまま自由に解放してやれ (Seishin wo hikari no mama jiyū ni kaihō shite yare)
+"Libera tu espíritu tal como es, como la luz."
+
+00:00:27.000 --> 00:00:31.000
+気持ちは分かるのが、もう我慢することはない (Kimochi wa wakaru noga, mō gaman suru koto wa nai)
+"Entiendo cómo te sientes, pero ya no tienes por qué seguir soportándolo."
