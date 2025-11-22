@@ -354,6 +354,143 @@
       .controls{gap:10px 12px;padding:12px}
       .time{min-width:58px;font-size:13px}
     }
+        /* ===== Ajustes para celular ===== */
+    @media (max-width: 768px) {
+      body{
+        font-size: 15px;
+      }
+
+      .container{
+        padding: 0 12px;
+      }
+
+      /* NAV: marca arriba, pestañas en dos filas si hace falta */
+      .nav-inner{
+        flex-wrap:wrap;
+        gap: 8px;
+      }
+      .brand{
+        font-size: 1rem;
+      }
+      .tabs{
+        width:100%;
+        justify-content:space-between;
+        gap: 6px;
+      }
+      .tab{
+        font-size: .8rem;
+      }
+
+      /* HERO */
+      .hero{
+        padding: 24px 0 16px;
+      }
+      .hero-logo img{
+        max-width: 260px;
+      }
+      .lead{
+        font-size: 1rem;
+        padding: 0 8px;
+      }
+
+      /* Bloque intro */
+      .frame{
+        margin-inline: 0;
+        border-radius: 14px;
+      }
+      .glass{
+        padding: 20px 16px !important;
+      }
+      #about-copy,
+      #about-copy-2{
+        text-align:left;
+        font-size: .98rem;
+      }
+
+      /* Reproductor */
+      .player{
+        margin: 0 -4px; /* que aproveche más ancho en cel */
+      }
+      .header{
+        padding: 10px 12px;
+      }
+      .player .header .title{
+        font-size: 14px;
+      }
+      .badge{
+        font-size: 11px;
+        padding: 4px 8px;
+      }
+
+      .controls{
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px 12px;
+      }
+      .controls .row{
+        justify-content:center;
+        flex-wrap:wrap;
+      }
+      .vol{
+        width: 100%;
+        max-width: 240px;
+      }
+      .select{
+        font-size: .85rem;
+      }
+      .btn{
+        --size: 34px;
+        width: var(--size);
+        height: var(--size);
+        font-size: .8rem;
+      }
+
+      .time{
+        min-width: 56px;
+        font-size: 12px;
+      }
+
+      .captions{
+        bottom: 4%;
+        padding: 0 6px;
+      }
+      .cap-line{
+        max-width: 100%;
+        font-size: .9rem;
+        padding: 6px 8px;
+      }
+
+      /* Tarjetas de funciones */
+      .functions-grid{
+        grid-template-columns: 1fr;
+      }
+      .card-inner{
+        padding: 10px 12px;
+      }
+
+      /* Footer */
+      .footer-inner{
+        padding: 14px 12px;
+      }
+    }
+
+    @media (max-width: 480px){
+      .tabs{
+        row-gap: 4px;
+        column-gap: 4px;
+      }
+      .tab{
+        flex: 1 1 calc(33% - 4px);
+        text-align:center;
+      }
+      .hero-logo img{
+        max-width: 220px;
+      }
+      .lead{
+        font-size: .95rem;
+      }
+    }
+
   </style>
 </head>
 <body>
