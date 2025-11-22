@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voces del Anime — Recursos</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root{
+      --ink:#111827; --brand:#5b21b6; --muted:#6b7280;
+      --grad1:#f0abfc; --grad2:#93c5fd; --grad3:#a7f3d0;
+      --page-max:1200px;
+      --vio:#7c3aed;
+      --leading:1.65;
+      --chip-bg:#faf5ff; --chip-bd:#e9d5ff; --chip-tx:#4c1d95;
+      --ok:#166534; --warn:#b45309;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      color:var(--ink);
+      background:linear-gradient(135deg,#fdf2f8,#eef2ff,#ecfdf5);
+      background-attachment:fixed;
+      letter-spacing:.01em;
+    }
+    .container{max-width:var(--page-max);margin:0 auto;padding:0 16px}
+    a{color:#6d28d9;text-decoration:none}
+
+    /* NAV (igual que el resto) */
+    .nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.7);backdrop-filter:blur(6px);border-bottom:1px solid #e9d5ff}
+    .nav-inner{display:flex;align-items:center;gap:12px;padding:10px 0}
+    .brand{font-weight:600;color:#6d28d9}
+    .tabs{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
+    .tab{font-weight:500}
+    .tab:hover,.tab:focus-visible{font-weight:600}
+    .tab.active{font-weight:800;text-decoration:underline}
+
+    /* HERO (tarjeta glass + borde degradado) */
+    .hero,.hero-visual{padding:56px 0 64px;position:relative}
+    .hero::before,.hero::after,.hero-visual::before,.hero-visual::after{content:none!important}
+    .hero-frame{
+      max-width:var(--page-max);margin:0 auto;border-radius:18px;padding:1px;
+      background:linear-gradient(135deg,var(--grad1),var(--grad2),var(--grad3));
+      box-shadow:0 10px 24px rgba(0,0,0,.08)
+    }
+    .hero-glass{
+      border-radius:18px;background:rgba(255,255,255,.65);
+      backdrop-filter:blur(10px);text-align:center;padding:28px 32px
+    }
+    .hero h1{margin:0;color:var(--brand);font-size:clamp(26px,5vw,44px)}
+    .lead{
+      margin:6px auto 0;color:var(--muted);max-width:66ch;text-align:center;font-weight:600;
+      background:linear-gradient(90deg,#7c3aed,#60a5fa);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+
+    /* BLOQUES */
+    .section{padding:24px 0}
+    .frame{
+      border-radius:18px;padding:1px;
+      background:linear-gradient(135deg,var(--grad1),var(--grad2),var(--grad3));
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+      max-width:var(--page-max);margin-inline:auto
+    }
+    .glass{
+      border-radius:18px;background:rgba(255,255,255,.65);
+      backdrop-filter:blur(10px);padding:22px
+    }
+    @media(min-width:720px){.glass{padding:28px}}
+    .title{
+      font-weight:800;color:#4c1d95;margin:0 0 10px;
+      position:relative; padding-bottom:4px;
+    }
+    .title::after{
+      content:""; position:absolute; left:0; bottom:-2px; height:3px; width:64px; border-radius:999px;
+      background:linear-gradient(90deg,#a78bfa,#93c5fd,#86efac); opacity:.9;
+    }
+    .muted{color:#6b7280}
+
+    /* CONTROLES */
+    .controls{
+      display:flex;gap:10px;flex-wrap:wrap;
+      align-items:center;margin:6px 0 14px
+    }
+    .chip{
+      border:1px solid var(--chip-bd); background:var(--chip-bg); color:var(--chip-tx);
+      border-radius:999px; padding:6px 10px; font-weight:700; cursor:pointer;
+      transition:background .15s ease, transform .12s ease, box-shadow .15s ease;
+      user-select:none;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      box-shadow:0 6px 16px rgba(124,58,237,.12);
+    }
+    .chip.is-active{ background:#ede9fe; border-color:#a78bfa }
+    .search{
+      flex:1; min-width:220px; border:1px solid #e9d5ff; border-radius:999px;
+      padding:10px 12px; background:#fff;
+      box-shadow:0 4px 12px rgba(0,0,0,.04);
+    }
+
+    /* CARDS */
+    .resources-grid{
+      display:grid;gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr))
+    }
+    .card{
+      background:rgba(255,255,255,.92);border:1px solid #ede9fe;border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      position:relative;
+    }
+    .card:hover{
+      transform: translateY(-3px);
+      box-shadow:0 12px 28px rgba(0,0,0,.10);
+      border-color:#ddd6fe;
+    }
+    .card-inner{padding:14px 16px}
+    .card-inner p{ line-height:var(--leading); margin-bottom:.8em; }
+    .card-inner p:last-child{ margin-bottom:0; }
+    .bullets{list-style:disc;padding-left:18px;margin:0}
+    .bullets li{ line-height:var(--leading); margin:.4em 0; }
+
+    /* Etiquetas y nivel */
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .tag{
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:.78rem; font-weight:700; color:#4338ca;
+      background:#eef2ff; border:1px solid #e0e7ff;
+      border-radius:999px; padding:4px 10px;
+    }
+    .level{ background:#ecfdf5; color:#065f46; border-color:#d1fae5; }
+    .org{ background:#fff7ed; color:#9a3412; border-color:#ffedd5; }
+
+    /* Botonera de la tarjeta */
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .btn{
+      display:inline-flex; align-items:center; gap:6px;
+      border:1px solid #c4b5fd; background:#fff; color:#7c3aed;
+      border-radius:999px; padding:6px 10px; font-weight:800; font-size:.9rem; text-decoration:none;
+      box-shadow:0 6px 16px rgba(124,58,237,.10);
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s;
+      cursor:pointer;
+    }
+    .btn:hover{
+      background:#f5f3ff;
+      transform: translateY(-1px);
+      box-shadow:0 10px 22px rgba(124,58,237,.16);
+      opacity:.95;
+    }
+
+    /* Acordeón */
+    .more[hidden]{display:none}
+    .toggle{
+      color:#6d28d9; font-weight:700; cursor:pointer;
+      border:0; background:transparent; padding:0;
+    }
+    .toggle[aria-expanded="true"]{ text-decoration:underline; }
+
+    /* Favoritos */
+    .fav{
+      position:absolute; top:10px; right:10px;
+      border:1px solid #fde68a; background:#fffbeb; color:#b45309;
+      border-radius:999px; padding:4px 8px;
+      font-weight:800; cursor:pointer; font-size:.85rem;
+    }
+    .fav.is-on{
+      background:#fef3c7; color:#92400e; border-color:#f59e0b;
+    }
+    .msg{ font-size:.85rem; margin-top:8px; }
+    .msg.ok{ color:var(--ok) }
+    .msg.warn{ color:var(--warn) }
+
+    /* Accesibilidad foco */
+    a:focus-visible, button:focus-visible, input:focus-visible{
+      outline:3px solid rgba(167,139,250,.4);
+      outline-offset:3px; border-radius:8px;
+    }
+
+    /* FOOTER */
+    .footer{
+      margin-top:28px;border-top:1px solid #e9d5ff;
+      background:rgba(255,255,255,.65)
+    }
+    .footer-inner{
+      display:grid;gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      padding:20px 0;color:#374151;
+      max-width:var(--page-max);margin-inline:auto
+    }
+    .footer .title{font-weight:800;color:#5b21b6;margin-bottom:6px}
+    ul{margin:0;padding-left:18px}
+
+    /* Títulos de las tarjetas en violeta oscuro (solo en Recursos) */
+    .resources-grid .card .title{
+      color:#5B21B6;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">Voces del Anime</a>
+      <div class="tabs">
+        <a class="tab" href="index.html">Inicio</a>
+        <a class="tab" href="lengua.html">Lengua</a>
+        <a class="tab" href="cultura.html">Cultura</a>
+        <a class="tab" href="comunidad.html">Comunidad</a>
+        <a class="tab active" href="recursos.html">Recursos</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="main">
+    <!-- HERO -->
+    <section class="hero hero-visual">
+      <div class="container">
+        <div class="hero-frame">
+          <div class="hero-glass">
+            <h1>Recursos</h1>
+            <p class="lead">Referencias, herramientas y guías para profundizar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARD PRINCIPAL -->
+    <section class="section">
+      <div class="frame">
+        <div class="glass">
+
+          <!-- Controles -->
+          <div class="controls" role="region" aria-label="Filtros y búsqueda">
+            <button class="chip is-active" data-filter="*">Todo</button>
+            <button class="chip" data-filter="curso">Cursos</button>
+            <button class="chip" data-filter="guia">Guías</button>
+            <button class="chip" data-filter="herr">Herramientas</button>
+            <button class="chip" data-filter="docente">Docentes</button>
+            <input class="search" id="q" type="search" placeholder="Buscar (ej. ‘furigana’, ‘UNESCO’, ‘A2’)" aria-label="Buscar recursos">
+          </div>
+
+          <div class="resources-grid" id="grid">
+            <!-- Fundación Japón -->
+            <div class="card" data-tags="curso docente" data-keywords="fundación japon minato marugoto A1 A2 cultura oficial gratis jlpt principiante intermedio" aria-label="Fundación Japón">
+              <div class="card-inner">
+                <div class="title">Fundación Japón — Minato / Marugoto</div>
+                <p>Cursos introductorios de lengua y cultura; rutas por niveles con materiales oficiales.</p>
+                <p class="muted">Nivel: A1–B1 · Formato: autoestudio + tutorías · Certificados digitales</p>
+                <div class="tags">
+                  <span class="tag level">A1–B1</span>
+                  <span class="tag org">Oficial</span>
+                  <span class="tag">Cultura</span>
+                </div>
+
+                <p><button class="toggle" data-toggle aria-expanded="false">Ver detalles</button></p>
+                <div class="more" hidden>
+                  <ul class="bullets">
+                    <li><strong>Minato</strong>: cursos en línea con foros, tareas y revisión.</li>
+                    <li><strong>Marugoto</strong>: materiales por temas (alimentación, trabajo, ocio) con audio.</li>
+                  </ul>
+                  <div class="actions">
+                    <a class="btn" href="https://minato-jf.jp/" target="_blank" rel="noopener">Abrir sitio</a>
+                    <button class="btn" data-copy="https://minato-jf.jp/">Copiar enlace</button>
+                  </div>
+                  <div class="msg" hidden></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- UNESCO -->
+            <div class="card" data-tags="guia docente" data-keywords="unesco competencia intercultural diversidad inclusion etica mediacion planificacion rubricas">
+              <div class="card-inner">
+                <div class="title">UNESCO — Competencias interculturales</div>
+                <p>Marco y actividades para diseñar experiencias críticas y contextualizadas.</p>
+                <p class="muted">Enfoque: ética, diversidad, inclusión, diálogo</p>
+                <div class="tags">
+                  <span class="tag">Actividades</span>
+                  <span class="tag">Evaluación</span>
+                </div>
+
+                <p><button class="toggle" data-toggle aria-expanded="false">Ver detalles</button></p>
+                <div class="more" hidden>
+                  <ul class="bullets">
+                    <li>Plantillas para <strong>rúbricas</strong> y autoevaluación.</li>
+                    <li>Sugerencias para <em>mediación</em> entre pares y co-diseño.</li>
+                  </ul>
+                  <div class="actions">
+                    <a class="btn" href="https://unesdoc.unesco.org/" target="_blank" rel="noopener">Abrir sitio</a>
+                    <button class="btn" data-copy="https://unesdoc.unesco.org/">Copiar enlace</button>
+                  </div>
+                  <div class="msg" hidden></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Herramientas -->
+            <div class="card" data-tags="herr" data-keywords="diccionario jisho tangorin furigana hiragana katakana tabla imprimible">
+              <div class="card-inner">
+                <div class="title">Herramientas</div>
+                <ul class="bullets">
+                  <li>Diccionario J–E (p. ej., Jisho, Tangorin).</li>
+                  <li>Generadores de <em>furigana</em> para textos.</li>
+                  <li>Tabla de <em>hiragana/katakana</em> imprimible.</li>
+                  <span class="tag">Diccionario</span>
+                </ul>
+
+                <p><button class="toggle" data-toggle aria-expanded="false">Ver detalles</button></p>
+                <div class="more" hidden>
+                  <ul class="bullets">
+                    <li><strong>Jisho.org</strong>: búsqueda por radicales, trazos y lectura.</li>
+                    <li><strong>Okurigana/Furigana tools</strong>: pegas texto y anotan lectura.</li>
+                    <li>Incluye hojas de práctica PDF para clase.</li>
+                  </ul>
+                  <div class="actions">
+                    <a class="btn" href="https://jisho.org/" target="_blank" rel="noopener">Abrir Jisho</a>
+                    <button class="btn" data-copy="https://jisho.org/">Copiar enlace</button>
+                  </div>
+                  <div class="msg" hidden></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Guías docentes -->
+            <div class="card" data-tags="docente guia" data-keywords="guia docente rubricas actividades niveles proyectos evaluación formativa">
+              <div class="card-inner">
+                <div class="title">Guías docentes</div>
+                <p>Sugerencias de mediación y evaluación formativa con ejemplos por niveles y contextos.</p>
+                <p class="muted">Incluye: rúbricas simples, checklist de proyecto y plantillas</p>
+                <div class="tags">
+                  <span class="tag">Plantillas</span>
+                  <span class="tag">Proyectos</span>
+                </div>
+
+                <p><button class="toggle" data-toggle aria-expanded="false">Ver detalles</button></p>
+                <div class="more" hidden>
+                  <ul class="bullets">
+                    <li>Banco de <strong>criterios</strong> por nivel (A1–B1).</li>
+                    <li>Ideas de <strong>tareas auténticas</strong> (clubes, comunidades).</li>
+                  </ul>
+                  <div class="actions">
+                    <button class="btn" data-copy="https://mc.jpf.go.jp/idioma-japones/ensenar-el-idioma-japones/materiales-didacticos/">Copiar enlace</button>
+                  </div>
+                  <div class="msg" hidden></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- NHK NEWS WEB Easy -->
+            <div class="card" data-tags="curso herr" data-keywords="nhk news web easy lectura lecturas furigana audio A2 B1 noticias faciles comprensión escuchar leer">
+              <div class="card-inner">
+                <div class="title">NHK NEWS WEB Easy</div>
+                <p>Noticias simplificadas con <em>furigana</em> y audio para practicar lectura y escucha.</p>
+                <p class="muted">Nivel: A2–B1 · Actualización diaria · Contenido auténtico graduado</p>
+                <div class="tags">
+                  <span class="tag level">A2–B1</span>
+                  <span class="tag">Lectura</span>
+                  <span class="tag">Audio</span>
+                </div>
+
+                <p><button class="toggle" data-toggle aria-expanded="false">Ver detalles</button></p>
+                <div class="more" hidden>
+                  <ul class="bullets">
+                    <li>Glosarios de palabras clave por nota.</li>
+                    <li>Opción de ocultar/mostrar <em>furigana</em>.</li>
+                    <li>Excelente para tareas de resumen y debate en clase.</li>
+                  </ul>
+                  <div class="actions">
+                    <a class="btn" href="https://www3.nhk.or.jp/news/easy/" target="_blank" rel="noopener">Abrir NHK Easy</a>
+                    <button class="btn" data-copy="https://www3.nhk.or.jp/news/easy/">Copiar enlace</button>
+                  </div>
+                  <div class="msg" hidden></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Guía de gramática de Tae Kim -->
+            <div class="card" data-tags="guia herr" data-keywords="tae kim guia gramática grammar explicación ejemplos jlpt referencia A1 A2 B1 autodidacta">
+              <div class="card-inner">
+                <div class="title">Guía de gramática de Tae Kim</div>
+                <p>Referencia clara y directa de gramática japonesa con ejemplos y secciones por nivel.</p>
+                <p class="muted">Uso: consulta rápida · Ejemplos graduales · Gratis</p>
+                <div class="tags">
+                  <span class="tag">Gramática</span>
+                  <span class="tag level">A1–B1</span>
+                </div>
+
+                <p><button class="toggle" data-toggle aria-expanded="false">Ver detalles</button></p>
+                <div class="more" hidden>
+                  <ul class="bullets">
+                    <li>Estructuras básicas a intermedias con explicación intuitiva.</li>
+                    <li>Comparaciones entre registros y notas de uso real.</li>
+                  </ul>
+                  <div class="actions">
+                    <a class="btn" href="http://www.guidetojapanese.org/learn/grammar" target="_blank" rel="noopener">Abrir guía</a>
+                    <button class="btn" data-copy="http://www.guidetojapanese.org/learn/grammar">Copiar enlace</button>
+                  </div>
+                  <div class="msg" hidden></div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /resources-grid -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="title">Voces del Anime</div>
+        <p>Prototipo conceptual para aprendizaje de lengua y cultura japonesa a través del anime.</p>
+      </div>
+      <div>
+        <div class="title">Enlaces</div>
+        <ul>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="creditos.html">Créditos</a></li>
+          <li><a href="politica.html">Política de uso educativo</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="title">Acerca de</div>
+        <p>Lengua, cultura y comunidad a través del anime.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const grid   = document.getElementById('grid');
+      const chips  = Array.from(document.querySelectorAll('.chip'));
+      const search = document.getElementById('q');
+      const cards  = Array.from(grid.querySelectorAll('.card'));
+
+      let activeTag='*', query='';
+
+      function apply(){
+        const q = (query||'').trim().toLowerCase();
+        cards.forEach(card=>{
+          const tags = (card.dataset.tags||'').toLowerCase().split(' ');
+          const text = (card.textContent + ' ' + (card.dataset.keywords||'')).toLowerCase();
+          const matchTag  = (activeTag==='*') || tags.includes(activeTag);
+          const matchText = q==='' || text.includes(q);
+          card.style.display = (matchTag && matchText) ? '' : 'none';
+        });
+      }
+
+      chips.forEach(btn=>{
+        btn.addEventListener('click',()=>{
+          chips.forEach(c=>c.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          activeTag = btn.dataset.filter || '*';
+          apply();
+        });
+      });
+
+      if(search){
+        search.addEventListener('input', e=>{
+          query = e.target.value;
+          apply();
+        });
+      }
+
+      // Acordeones "Ver detalles"
+      document.addEventListener('click', (e)=>{
+        const t = e.target.closest('[data-toggle]');
+        if(!t) return;
+        const more = t.parentElement.nextElementSibling;
+        if(!more) return;
+        const hidden = more.hasAttribute('hidden');
+        if(hidden){
+          more.removeAttribute('hidden');
+          t.setAttribute('aria-expanded','true');
+          t.textContent='Ocultar detalles';
+        }else{
+          more.setAttribute('hidden','');
+          t.setAttribute('aria-expanded','false');
+          t.textContent='Ver detalles';
+        }
+      });
+
+      // Copiar enlace
+      document.addEventListener('click', async (e)=>{
+        const b = e.target.closest('[data-copy]');
+        if(!b) return;
+        const url  = b.getAttribute('data-copy');
+        const card = b.closest('.card');
+        const msg  = card.querySelector('.msg');
+        try{
+          await navigator.clipboard.writeText(url);
+          msg.textContent = 'Enlace copiado al portapapeles.';
+          msg.className   = 'msg ok';
+          msg.hidden      = false;
+        }catch(err){
+          msg.textContent = 'No se pudo copiar. Mantené presionado para seleccionar.';
+          msg.className   = 'msg warn';
+          msg.hidden      = false;
+        }
+        setTimeout(()=>{ msg.hidden = true; }, 2200);
+      });
+
+      // Favoritos (localStorage) — protegido por si no hay .fav en la tarjeta
+      const KEY='recursos:favs';
+      let favs = new Set(JSON.parse(localStorage.getItem(KEY)||'[]'));
+
+      cards.forEach(card=>{
+        const btn = card.querySelector('.fav');
+        if(!btn) return; // si no hay botón de favoritos, no hace nada
+
+        const id = (card.querySelector('.title')?.textContent || '').trim();
+        const setState = ()=>{
+          const on = favs.has(id);
+          btn.classList.toggle('is-on', on);
+          btn.textContent = on ? '★ Favorito' : '☆ Guardar';
+          btn.setAttribute('aria-pressed', String(on));
+        };
+        setState();
+
+        btn.addEventListener('click', ()=>{
+          if(favs.has(id)) favs.delete(id); else favs.add(id);
+          localStorage.setItem(KEY, JSON.stringify(Array.from(favs)));
+          setState();
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>
