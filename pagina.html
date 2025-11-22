@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voces del Anime — Video con subtítulos</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    :root{
+      --ink:#111827; --brand:#5b21b6; --muted:#6b7280;
+      --grad1:#f0abfc; --grad2:#93c5fd; --grad3:#a7f3d0;
+      --page-max:1200px;
+      --vio:#7c3aed;
+      --leading:1.65;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      color:var(--ink);
+      background:linear-gradient(135deg,#fdf2f8,#eef2ff,#ecfdf5);
+      background-attachment:fixed;
+      letter-spacing:.01em;
+    }
+
+    /* CONTAINER mobile-first */
+    .container{
+      max-width:480px;
+      margin:0 auto;
+      padding:0 12px;
+    }
+
+    a{color:#6d28d9;text-decoration:none}
+
+    /* NAV */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:rgba(255,255,255,.85);
+      border-bottom:1px solid #e9d5ff;
+      backdrop-filter:blur(6px);
+    }
+    .nav-inner{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:6px;
+      padding:8px 0;
+    }
+    .brand{
+      font-weight:700;
+      color:#6d28d9;
+      font-size:15px;
+    }
+    .tabs{
+      width:100%;
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+      padding:4px 0 2px;
+      margin-left:0;
+      scrollbar-width:thin;
+      -webkit-overflow-scrolling:touch;
+    }
+    .tabs::-webkit-scrollbar{height:4px}
+    .tabs::-webkit-scrollbar-thumb{background:#d8b4fe;border-radius:999px}
+    .tab{
+      font-weight:500;
+      font-size:13px;
+      padding:6px 10px;
+      white-space:nowrap;
+      border-radius:999px;
+      background:rgba(255,255,255,.9);
+      border:1px solid #e9d5ff;
+    }
+    .tab.active{
+      font-weight:700;
+      background:linear-gradient(90deg,#ede9fe,#e0f2fe);
+      border-color:#c4b5fd;
+    }
+
+    /* HERO */
+    .hero{
+      padding:32px 0 28px;
+      position:relative;
+    }
+    .hero-frame{
+      max-width:100%;
+      margin:0 auto;
+      border-radius:18px;
+      padding:1px;
+      background:linear-gradient(135deg,var(--grad1),var(--grad2),var(--grad3));
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+    }
+    .hero-glass{
+      border-radius:18px;
+      background:rgba(255,255,255,.65);
+      backdrop-filter:blur(10px);
+      text-align:center;
+      padding:18px 16px;
+    }
+    .hero h1{
+      margin:0;
+      color:var(--brand);
+      font-size:clamp(24px,6vw,34px);
+    }
+    .lead{
+      margin:6px auto 0;
+      max-width:42ch;
+      text-align:center;
+      font-weight:600;
+      font-size:0.95rem;
+      background:linear-gradient(90deg,#7c3aed,#60a5fa);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    /* BLOQUE PRINCIPAL */
+    .section{padding:20px 0}
+    .frame{
+      border-radius:18px;
+      padding:1px;
+      background:linear-gradient(135deg,var(--grad1),var(--grad2),var(--grad3));
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+      max-width:100%;
+      margin-inline:auto;
+    }
+    .glass{
+      border-radius:18px;
+      background:rgba(255,255,255,.65);
+      backdrop-filter:blur(10px);
+      padding:20px 16px;
+    }
+
+    .title{
+      font-weight:800;
+      color:#4c1d95;
+      margin:0 0 10px;
+      position:relative;
+      padding-bottom:4px;
+      font-size:18px;
+    }
+    .title::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-2px;
+      height:3px;
+      width:64px;
+      border-radius:999px;
+      background:linear-gradient(90deg,#a78bfa,#93c5fd,#86efac);
+      opacity:.95;
+    }
+    .muted{color:#6b7280}
+    p,li{line-height:var(--leading);font-size:.95rem}
+
+    /* TARJETA VIDEO */
+    .card{
+      background:rgba(255,255,255,.92);
+      border:1px solid #ede9fe;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
+      padding:14px 14px 16px;
+      transition: transform .25s cubic-bezier(.22,1,.36,1),
+                  box-shadow .25s,
+                  border-color .25s;
+      will-change: transform;
+    }
+    .card:hover,
+    .card:focus-within{
+      transform: translateY(-6px);
+      box-shadow:0 16px 32px rgba(23,15,41,.14), 0 4px 10px rgba(23,15,41,.06);
+      border-color:#d8b4fe;
+    }
+    .caption{
+      margin-top:10px;
+      font-size:.92rem;
+      color:#4b5563;
+      text-align:center;
+    }
+
+    /* Video responsive */
+    .video-shell{
+      width:100%;
+      border-radius:16px;
+      overflow:hidden;
+      background:#000;
+      box-shadow:0 10px 24px rgba(0,0,0,.18);
+    }
+    .video-shell video{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    /* FOOTER */
+    .footer{
+      margin-top:28px;
+      border-top:1px solid #e9d5ff;
+      background:rgba(255,255,255,.75);
+    }
+    .footer-inner{
+      display:grid;
+      gap:14px;
+      grid-template-columns:1fr;
+      padding:16px 0 20px;
+      color:#374151;
+      font-size:0.92rem;
+    }
+    .footer .title{
+      font-weight:800;
+      color:#5b21b6;
+      margin-bottom:4px;
+      font-size:14px;
+    }
+    .footer-inner a{
+      text-decoration:underline;
+      text-underline-offset:1.5px;
+      text-decoration-thickness:1px;
+      text-decoration-skip-ink:auto;
+    }
+    .footer-inner a:hover{
+      text-decoration-thickness:1.25px;
+    }
+    ul{margin:0;padding-left:18px}
+
+    /* Accesibilidad */
+    a:focus-visible,
+    button:focus-visible{
+      outline:3px solid rgba(167,139,250,.45);
+      outline-offset:3px;
+      border-radius:8px;
+    }
+    @media (prefers-reduced-motion: reduce){
+      *,*::before,*::after{
+        animation:none !important;
+        transition:none !important;
+      }
+    }
+
+    /* TABLET / DESKTOP */
+    @media (min-width:720px){
+      .container{
+        max-width:var(--page-max);
+        padding:0 16px;
+      }
+      .tabs{
+        width:auto;
+        overflow:visible;
+        margin-left:auto;
+        padding:0;
+      }
+      .hero{
+        padding:56px 0 64px;
+      }
+      .hero-glass{
+        padding:28px 32px;
+      }
+      .hero h1{
+        font-size:clamp(26px,4vw,44px);
+      }
+      .glass{
+        padding:28px;
+      }
+      .frame{
+        max-width:var(--page-max);
+      }
+      .footer-inner{
+        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">Voces del Anime</a>
+      <div class="tabs">
+        <a class="tab" href="index.html">Inicio</a>
+        <a class="tab" href="lengua.html">Lengua</a>
+        <a class="tab" href="cultura.html">Cultura</a>
+        <a class="tab" href="comunidad.html">Comunidad</a>
+        <a class="tab active" href="recursos.html">Recursos</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-frame">
+          <div class="hero-glass">
+            <h1>Video con subtítulos</h1>
+            <p class="lead">Probá cambiar entre español, rōmaji y japonés desde el menú de subtítulos del reproductor.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOQUE VIDEO -->
+    <section class="section">
+      <div class="container">
+        <div class="frame">
+          <div class="glass">
+            <h2 class="title">Demostración de pistas de subtítulos</h2>
+            <div class="card">
+              <div class="video-shell">
+                <video controls preload="metadata">
+                  <source src="video.mp4" type="video/mp4">
+                  <track label="Español" kind="subtitles" srclang="es" src="subs-es.vtt" default>
+                  <track label="Romaji" kind="subtitles" srclang="ro" src="subs-ro.vtt">
+                  <track label="Japonés" kind="subtitles" srclang="ja" src="subs-ja.vtt">
+                  Tu navegador no soporta el video.
+                </video>
+              </div>
+              <p class="caption">
+                💡 En el icono de subtítulos del reproductor podés elegir:
+                <br>
+                <strong>Español</strong>, <strong>Romaji</strong> o <strong>Japonés</strong>, según qué capa quieras trabajar.
+              </p>
+            </div>
+
+            <p class="muted" style="margin-top:14px">
+              Sugerencia didáctica: podés pedir que primero lo vean con subtítulos en japonés, luego en rōmaji
+              y por último en español, comparando expresiones y estructuras.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="title">Voces del Anime</div>
+        <p>Prototipo conceptual para aprendizaje de lengua y cultura japonesa a través del anime.</p>
+      </div>
+      <div>
+        <div class="title">Enlaces</div>
+        <ul>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="creditos.html">Créditos</a></li>
+          <li><a href="politica.html">Política de uso educativo</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="title">Acerca de</div>
+        <p>Lengua, cultura y comunidad a través del anime.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
