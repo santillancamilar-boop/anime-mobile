@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voces del Anime — Cultura</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    :root{
+      --ink:#111827; 
+      --brand:#5b21b6; 
+      --muted:#6b7280;
+      --grad1:#f0abfc; 
+      --grad2:#93c5fd; 
+      --grad3:#a7f3d0;
+      --page-max:1200px;
+      --vio:#7c3aed;
+      --leading:1.65;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      color:var(--ink);
+      background:linear-gradient(135deg,#fdf2f8,#eef2ff,#ecfdf5);
+      background-attachment:fixed;
+      letter-spacing:.01em;
+    }
+
+    /* CONTAINER */
+    .container{
+      max-width:var(--page-max);
+      margin:0 auto;
+      padding:0 12px;
+    }
+
+    a{color:#6d28d9;text-decoration:none}
+    .muted{color:var(--muted);}
+
+    /* NAV (mobile-first) */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:rgba(255,255,255,.7);
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid #e9d5ff;
+    }
+    .nav-inner{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:8px;
+      padding:8px 0;
+    }
+    .brand{
+      font-weight:600;
+      color:#6d28d9;
+      font-size:.95rem;
+    }
+    .tabs{
+      width:100%;
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+      padding:4px 0 2px;
+      margin-left:0;
+      scrollbar-width:thin;
+      -webkit-overflow-scrolling:touch;
+    }
+    .tabs::-webkit-scrollbar{height:4px}
+    .tabs::-webkit-scrollbar-thumb{
+      background:#d8b4fe;
+      border-radius:999px;
+    }
+    .tab{
+      font-weight:500;
+      font-size:.85rem;
+      padding:6px 10px;
+      white-space:nowrap;
+      border-radius:999px;
+      background:rgba(255,255,255,.9);
+      border:1px solid #e9d5ff;
+    }
+    .tab:hover,
+    .tab:focus-visible{
+      font-weight:600;
+    }
+    .tab.active{
+      font-weight:700;
+      background:linear-gradient(90deg,#ede9fe,#e0f2fe);
+      border-color:#c4b5fd;
+    }
+
+    /* HERO */
+    .hero,
+    .hero-visual{
+      padding:40px 0 36px;
+      position:relative;
+    }
+    .hero::before,
+    .hero::after,
+    .hero-visual::before,
+    .hero-visual::after{
+      content:none!important;
+    }
+    .hero-frame{
+      max-width:var(--page-max);
+      margin-inline:auto;
+      border-radius:18px;
+      padding:1px;
+      background:linear-gradient(135deg,var(--grad1),var(--grad2),var(--grad3));
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+    }
+    .hero-glass{
+      border-radius:18px;
+      background:rgba(255,255,255,.65);
+      backdrop-filter:blur(10px);
+      text-align:center;
+      padding:22px 18px;
+    }
+    .hero h1{
+      margin:0;
+      color:var(--brand);
+      font-size:clamp(26px,5vw,44px);
+    }
+    .lead{
+      margin:6px auto 0;
+      color:var(--muted);
+      max-width:66ch;
+      text-align:center;
+      font-weight:600;
+      font-size:.98rem;
+      background:linear-gradient(90deg,#7c3aed,#60a5fa);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    /* BLOQUES GENERALES */
+    .section{padding:24px 0;}
+    .frame{
+      border-radius:18px;
+      padding:1px;
+      background:linear-gradient(135deg,var(--grad1),var(--grad2),var(--grad3));
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+      max-width:var(--page-max);
+      margin-inline:auto;
+    }
+    .glass{
+      border-radius:18px;
+      background:rgba(255,255,255,.65);
+      backdrop-filter:blur(10px);
+      padding:22px;
+    }
+
+    .title{
+      font-weight:800;
+      color:#4c1d95;
+      margin:0 0 10px;
+      position:relative;
+      padding-bottom:4px;
+    }
+    .title::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-2px;
+      height:3px;
+      width:64px;
+      border-radius:999px;
+      background:linear-gradient(90deg,#a78bfa,#93c5fd,#86efac);
+      opacity:.9;
+    }
+
+    p, li{
+      line-height:var(--leading);
+      font-size:.95rem;
+    }
+
+    /* LAYOUT: panel de prácticas a la derecha */
+    .content-2col{
+      display:grid;
+      gap:16px;
+    }
+
+    /* Tarjetas internas */
+    .grid-3{
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    }
+    .gestures-grid{margin-top:8px;}
+    .card{
+      background:rgba(255,255,255,.92);
+      border:1px solid #ede9fe;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 12px 28px rgba(0,0,0,.10);
+      border-color:#ddd6fe;
+    }
+    .card-inner{
+      padding:14px 16px;
+    }
+    .card-inner p{
+      line-height:var(--leading);
+      margin-bottom:.8em;
+    }
+    .card-inner p:last-child{margin-bottom:0;}
+
+    /* Controles filtro/busca */
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:12px;
+    }
+    .controls input[type="search"]{
+      flex:1;
+      border:1px solid #e9d5ff;
+      border-radius:999px;
+      padding:10px 12px;
+      background:#fff;
+      box-shadow:0 4px 12px rgba(0,0,0,.04);
+      transition:box-shadow .15s ease,border-color .15s ease;
+      text-align:center;
+    }
+    .controls input[type="search"]:focus{
+      outline:none;
+      text-align:left;
+      border-color:#a78bfa;
+      box-shadow:0 0 0 3px rgba(167,139,250,.25);
+    }
+    .btn-chip{
+      border:1px solid #c4b5fd;
+      background:#faf5ff;
+      color:#4c1d95;
+      border-radius:999px;
+      padding:6px 10px;
+      font-weight:700;
+      cursor:pointer;
+      font-size:.85rem;
+      transition:background .15s ease, transform .12s ease, box-shadow .15s ease;
+    }
+    .btn-chip:hover{
+      transform:translateY(-1px);
+      box-shadow:0 6px 16px rgba(124,58,237,.12);
+    }
+    .btn-chip.is-active{
+      background:#ede9fe;
+      border-color:#a78bfa;
+    }
+
+    .btn-link{
+      display:inline-block;
+      margin-top:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid #c4b5fd;
+      background:#fff;
+      color:#7c3aed;
+      font-weight:800;
+      font-size:.9rem;
+      text-decoration:none;
+      box-shadow:0 6px 16px rgba(124,58,237,.10);
+      transition:transform .15s ease, box-shadow .15s ease, opacity .15s;
+    }
+    .btn-link:hover{
+      background:#f5f3ff;
+      transform:translateY(-1px);
+      box-shadow:0 10px 22px rgba(124,58,237,.16);
+      opacity:.95;
+    }
+    .more[hidden]{display:none}
+    .feedback{
+      margin-top:8px;
+      font-weight:700;
+      font-size:.9rem;
+    }
+    .feedback.ok{color:#166534}
+    .feedback.err{color:#991b1b}
+
+    /* Furigana */
+    .jp-title{color:var(--ink);}
+    ruby{ruby-position:over;}
+    rt{font-size:.7em;color:#9ca3af;line-height:1;}
+
+    /* Separadores dentro de la grid (gestos vs. quiz) */
+    .grid-sep{grid-column:1 / -1;}
+    .section-divider{
+      height:1px;
+      border:0;
+      margin:8px 0 2px;
+      background:linear-gradient(90deg,transparent,#e9d5ff,transparent);
+    }
+
+    /* Accesibilidad foco */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible{
+      outline:3px solid rgba(167,139,250,.4);
+      outline-offset:3px;
+      border-radius:8px;
+    }
+
+    /* FOOTER */
+    .footer{
+      margin-top:28px;
+      border-top:1px solid #e9d5ff;
+      background:rgba(255,255,255,.65);
+    }
+    .footer-inner{
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      padding:16px 12px 20px;
+      color:#374151;
+      max-width:var(--page-max);
+      margin-inline:auto;
+      font-size:.92rem;
+    }
+    .footer .title{
+      font-weight:800;
+      color:#5b21b6;
+      margin-bottom:6px;
+      font-size:.9rem;
+    }
+    ul{margin:0;padding-left:18px;}
+
+    /* — Solo títulos en violeta oscuro (Cultura) — */
+    .gestures-grid .card .title,
+    .gestures-grid .card .jp-title,
+    .aside-sticky .card .title,
+    .hero-glass h1{
+      color:#5B21B6;
+    }
+
+    /* TABLET / DESKTOP */
+    @media(min-width:640px){
+      .container{padding:0 16px;}
+    }
+
+    @media(min-width:1024px){
+      .content-2col{
+        grid-template-columns:minmax(0,1fr) 340px;
+        align-items:start;
+      }
+      .aside-sticky{
+        position:sticky;
+        top:88px;
+      }
+    }
+
+    @media(min-width:720px){
+      .hero,
+      .hero-visual{
+        padding:56px 0 64px;
+      }
+      .hero-glass{
+        padding:28px 32px;
+      }
+      .glass{
+        padding:28px;
+      }
+      .tabs{
+        width:auto;
+        overflow:visible;
+        margin-left:auto;
+        padding:0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">Voces del Anime</a>
+      <div class="tabs">
+        <a class="tab" href="index.html">Inicio</a>
+        <a class="tab" href="lengua.html">Lengua</a>
+        <a class="tab active" href="cultura.html">Cultura</a>
+        <a class="tab" href="comunidad.html">Comunidad</a>
+        <a class="tab" href="recursos.html">Recursos</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="main">
+    <!-- HERO -->
+    <section class="hero hero-visual">
+      <div class="container">
+        <div class="hero-frame">
+          <div class="hero-glass">
+            <h1>Cultura</h1>
+            <p class="lead">Gestos, contextos y normas sociales frecuentes en el anime.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARD PRINCIPAL -->
+    <section class="section">
+      <div class="container">
+        <div class="frame">
+          <div class="glass">
+
+            <div class="content-2col">
+              <!-- Columna principal: controles + gestos -->
+              <div>
+                <!-- Controles de filtro/busca -->
+                <div class="controls" role="region" aria-label="Filtros y búsqueda">
+                  <button class="btn-chip is-active" data-filter="*">Todo</button>
+                  <button class="btn-chip" data-filter="escuela">Escuela</button>
+                  <button class="btn-chip" data-filter="trabajo">Trabajo</button>
+                  <button class="btn-chip" data-filter="familia">Familia</button>
+                  <button class="btn-chip" data-filter="clubes">Clubes</button>
+                  <button class="btn-chip" data-filter="salud">Salud</button>
+                  <button class="btn-chip" data-filter="templo">Templo</button>
+                  <input id="filter-input" type="search" placeholder="Buscar (ej. ‘reverencia’, ‘senpai’)" aria-label="Buscar en tarjetas">
+                </div>
+
+                <div class="grid-3 gestures-grid">
+                  <!-- お辞儀 / Ojigi -->
+                  <div class="card" data-tags="general escuela trabajo" data-keywords="ojigi reverencia saludo disculpa agradecimiento">
+                    <div class="card-inner">
+                      <div class="title jp-title">お<ruby>辞儀<rt>じぎ</rt></ruby> (Ojigi)</div>
+                      <p>Inclinación para mostrar respeto; el ángulo varía según la formalidad.</p>
+                      <p class="muted">Contexto: saludos, disculpas, agradecimientos.</p>
+                      <a href="#" class="btn-link" data-toggle aria-expanded="false" role="button">Ver ejemplos</a>
+                      <div class="more" hidden>
+                        <ul>
+                          <li>~15° saludo casual; ~30° formal; ~45° disculpa profunda.</li>
+                          <li>Evitar contacto visual directo en inclinación profunda.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- お土産 / Omiyage -->
+                  <div class="card" data-tags="familia trabajo escuela" data-keywords="omiyage souvenirs regalos">
+                    <div class="card-inner">
+                      <div class="title jp-title">お<ruby>土産<rt>みやげ</rt></ruby> (Omiyage)</div>
+                      <p>Regalos regionales al regresar de un viaje; refuerzan lazos y cortesía.</p>
+                      <p class="muted">Contexto: escuela, trabajo, visitas familiares.</p>
+                      <a href="#" class="btn-link" data-toggle aria-expanded="false" role="button">Ver ejemplos</a>
+                      <div class="more" hidden>
+                        <ul>
+                          <li>Dulces locales empaquetados individualmente para compartir.</li>
+                          <li>Se ofrece con: “これ、○○のお土産です”.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 先輩 / 後輩 -->
+                  <div class="card" data-tags="clubes escuela trabajo" data-keywords="senpai kohai mentor alumno respeto">
+                    <div class="card-inner">
+                      <div class="title jp-title">
+                        <ruby>先輩<rt>せんぱい</rt></ruby> (Senpai) / <ruby>後輩<rt>こうはい</rt></ruby> (Kōhai)
+                      </div>
+                      <p>Relación de mentoría y cuidado: el senpai guía; el kōhai respeta y aprende.</p>
+                      <p class="muted">Contexto: clubes, deportes, compañías.</p>
+                      <a href="#" class="btn-link" data-toggle aria-expanded="false" role="button">Ver ejemplos</a>
+                      <div class="more" hidden>
+                        <ul>
+                          <li>El kōhai usa lenguaje más cortés; el senpai da orientación.</li>
+                          <li>Ejemplo: “おはようございます、先輩”.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- TPO -->
+                  <div class="card" data-tags="general trabajo escuela" data-keywords="tpo registro formal informal honorifico">
+                    <div class="card-inner">
+                      <div class="title jp-title">
+                        TPO（<ruby>時<rt>とき</rt></ruby>・<ruby>場所<rt>ばしょ</rt></ruby>・<ruby>場合<rt>ばあい</rt></ruby>）
+                      </div>
+                      <p>Adecuar lenguaje y conducta al momento, lugar y ocasión.</p>
+                      <p class="muted">Contexto: diferencia entre informal, cortés y honorífico.</p>
+                      <a href="#" class="btn-link" data-toggle aria-expanded="false" role="button">Ver ejemplos</a>
+                      <div class="more" hidden>
+                        <ul>
+                          <li>Amigos: “おはよう”; profesor: “おはようございます”.</li>
+                          <li>Evitar jerga en presentaciones o con desconocidos.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 手水舎 / Temizuya -->
+                  <div class="card" data-tags="templo" data-keywords="temizuya purificación santuario jinja">
+                    <div class="card-inner">
+                      <div class="title jp-title"><ruby>手水舎<rt>ちょうずや</rt></ruby> (Chōzuya)</div>
+                      <p>Ritual de limpieza al entrar al santuario: purifica manos y boca antes de orar.</p>
+                      <p class="muted">Contexto: ingreso a santuarios sintoístas, 神社 (jinja).</p>
+                      <a href="#" class="btn-link" data-toggle aria-expanded="false" role="button">Ver ejemplos</a>
+                      <div class="more" hidden>
+                        <ul>
+                          <li>Toma el cazo con la derecha, lava la izquierda; cambia de mano y lava la derecha.</li>
+                          <li>Vierte agua en la izquierda para enjuagar la boca (no beber) y escupe fuera del pilón.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 二礼二拍手一礼 -->
+                  <div class="card" data-tags="templo" data-keywords="rezo santuario palmadas protocolo">
+                    <div class="card-inner">
+                      <div class="title jp-title">
+                        <ruby>二礼二拍手一礼<rt>にれい に はくしゅ いちれい</rt></ruby> (Nirei ni Hakushu Ichirei)
+                      </div>
+                      <p>Protocolo habitual: dos reverencias, dos palmadas, rezo silencioso y reverencia final.</p>
+                      <p class="muted">Contexto: frente al altar principal del santuario.</p>
+                      <a href="#" class="btn-link" data-toggle aria-expanded="false" role="button">Ver ejemplos</a>
+                      <div class="more" hidden>
+                        <ul>
+                          <li>Opcional: tocar la campana antes del rezo para anunciar tu presencia.</li>
+                          <li>Dar una pequeña ofrenda monetaria antes de la secuencia.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- マスク着用のマナー -->
+                  <div class="card" data-tags="salud" data-keywords="mascarilla etiqueta salud covid resfrio">
+                    <div class="card-inner">
+                      <div class="title jp-title">
+                        マスク<ruby>着用<rt>ちゃくよう</rt></ruby>のマナー (Masuku Chakuyō no Manā)
+                      </div>
+                      <p>Usar mascarilla en resfríos o espacios concurridos para cuidar a los demás.</p>
+                      <p class="muted">Contexto: transporte, aula, reuniones en temporada de resfríos.</p>
+                      <a href="#" class="btn-link" data-toggle aria-expanded="false" role="button">Ver ejemplos</a>
+                      <div class="more" hidden>
+                        <ul>
+                          <li>Avisar: “<ruby>風邪<rt>かぜ</rt></ruby>をひいていて… (estoy resfriado)”.</li>
+                          <li>Evitar quitársela al hablar de cerca; cambiarla si está húmeda.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- お大事に -->
+                  <div class="card" data-tags="salud" data-keywords="odaijini salud pronta recuperación que te mejores">
+                    <div class="card-inner">
+                      <div class="title jp-title">お<ruby>大事<rt>だいじ</rt></ruby>に (Odaiji ni)</div>
+                      <p>Expresión para desear pronta recuperación: “¡Que te mejores!”.</p>
+                      <p class="muted">Contexto: despedirse de alguien enfermo o lesionado.</p>
+                      <a href="#" class="btn-link" data-toggle aria-expanded="false" role="button">Ver ejemplos</a>
+                      <div class="more" hidden>
+                        <ul>
+                          <li>En consulta: “お<ruby>大事<rt>だいじ</rt></ruby>にしてください”。</li>
+                          <li>Con amigos: “<ruby>早<rt>はや</rt></ruby>く<ruby>良<rt>よ</rt></ruby>くなってね”。</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 靴を脱ぐ -->
+                  <div class="card" data-tags="familia templo escuela" data-keywords="zapatos descalzarse entrada genkan dojo casa">
+                    <div class="card-inner">
+                      <div class="title jp-title">
+                        <ruby>靴<rt>くつ</rt></ruby>を<ruby>脱<rt>ぬ</rt></ruby>ぐ (Kutsu o nugu)
+                      </div>
+                      <p>Quitar los zapatos al entrar a casa, templos o ciertos espacios.</p>
+                      <p class="muted">Contexto: genkan (entrada), templos, algunas aulas o salas de club.</p>
+                      <a href="#" class="btn-link" data-toggle aria-expanded="false" role="button">Ver ejemplos</a>
+                      <div class="more" hidden>
+                        <ul>
+                          <li>Dejar los zapatos ordenados con la punta hacia la salida.</li>
+                          <li>
+                            Usar スリッパ (calzado para interiores) si están disponibles; no entrar al tatami con
+                            <ruby><rb>上履</rb><rt>うわばき</rt></ruby> (calzado escolar para interiores).
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 名刺交換 -->
+                  <div class="card" data-tags="trabajo" data-keywords="meishi intercambio tarjetas presentacion negocio empresa">
+                    <div class="card-inner">
+                      <div class="title jp-title">
+                        <ruby>名刺<rt>めいし</rt></ruby><ruby>交換<rt>こうかん</rt></ruby> (Meishi Kōkan)
+                      </div>
+                      <p>Intercambio de tarjetas de presentación con ambas manos y breve inclinación.</p>
+                      <p class="muted">Contexto: reuniones de trabajo, visitas a empresas.</p>
+                      <a href="#" class="btn-link" data-toggle aria-expanded="false" role="button">Ver ejemplos</a>
+                      <div class="more" hidden>
+                        <ul>
+                          <li>Recibir mirando la tarjeta; no guardarla de inmediato, colócala sobre la mesa.</li>
+                          <li>Presentar la tuya de forma legible para la otra persona.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 正座 -->
+                  <div class="card" data-tags="templo familia" data-keywords="seiza sentarse tatami ceremonia respeto">
+                    <div class="card-inner">
+                      <div class="title jp-title"><ruby>正座<rt>せいざ</rt></ruby> (Seiza)</div>
+                      <p>Postura formal de rodillas sobre el tatami; expresa respeto y atención.</p>
+                      <p class="muted">Contexto: ceremonias, visitas formales, algunas clases tradicionales.</p>
+                      <a href="#" class="btn-link" data-toggle aria-expanded="false" role="button">Ver ejemplos</a>
+                      <div class="more" hidden>
+                        <ul>
+                          <li>Espalda recta, empeines al suelo, manos sobre los muslos.</li>
+                          <li>
+                            Para descansar, podés pasar a
+                            <ruby><rb>胡坐</rb><rt>あぐら</rt></ruby> (posición sentada cruzada)
+                            si el contexto lo permite.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 乾杯 -->
+                  <div class="card" data-tags="familia trabajo" data-keywords="kanpai brindis saludo comida fiesta">
+                    <div class="card-inner">
+                      <div class="title jp-title"><ruby>乾杯<rt>かんぱい</rt></ruby> (Kanpai)</div>
+                      <p>Brindis al inicio de una comida o reunión; se eleva el vaso sin cruzar brazos.</p>
+                      <p class="muted">Contexto: cenas familiares, despedidas, encuentros de empresa.</p>
+                      <a href="#" class="btn-link" data-toggle aria-expanded="false" role="button">Ver ejemplos</a>
+                      <div class="more" hidden>
+                        <ul>
+                          <li>Mantener el vaso un poco más bajo que el de tu superior.</li>
+                          <li>Decir “<ruby>乾杯<rt>かんぱい</rt></ruby>！” antes de beber.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                </div><!-- /.gestures-grid -->
+              </div>
+
+              <!-- Panel lateral: Práctica / quizzes -->
+              <aside class="aside-sticky" id="panel-practica" aria-label="Panel de práctica">
+                <div class="card">
+                  <div class="card-inner">
+                    <div class="title" style="margin-bottom:6px">Práctica: mini-quizzes</div>
+
+                    <!-- Mini-quiz 1 -->
+                    <form id="quiz-tpo">
+                      <p class="muted">Volvés de Kyoto a tu club escolar. ¿Qué práctica cultural es la más adecuada?</p>
+                      <label><input type="radio" name="q1" value="ojigi"> Hacer una reverencia profunda a todos</label><br>
+                      <label><input type="radio" name="q1" value="omiyage"> Llevar omiyage para compartir</label><br>
+                      <label><input type="radio" name="q1" value="tpo"> Hablar informal con el profesor</label><br>
+                      <button class="btn-link" type="submit">Comprobar</button>
+                      <p class="feedback" hidden></p>
+                    </form>
+
+                    <hr class="section-divider" aria-hidden="true">
+
+                    <!-- Mini-quiz 2: Templo -->
+                    <form id="quiz-templo" style="margin-top:8px">
+                      <p class="muted">Frente al altar del santuario, ¿cuál es la secuencia correcta?</p>
+                      <label><input type="radio" name="q2" value="una"> Una reverencia, una palmada</label><br>
+                      <label>
+                        <input type="radio" name="q2" value="ritual">
+                        <ruby><rb>二礼二拍手一礼</rb><rt>にれい に はくしゅ いちれい</rt></ruby>
+                      </label><br>
+                      <label><input type="radio" name="q2" value="tres"> Tres reverencias sin palmadas</label><br>
+                      <button class="btn-link" type="submit">Comprobar</button>
+                      <p class="feedback" hidden></p>
+                    </form>
+
+                    <hr class="section-divider" aria-hidden="true">
+
+                    <!-- Mini-quiz 4: Salud -->
+                    <form id="quiz-salud" style="margin-top:8px">
+                      <p class="muted">¿Cuándo es más adecuado decir “お<ruby><rb>大事</rb><rt>だいじ</rt></ruby>に”?</p>
+                      <label><input type="radio" name="q4" value="tarde"> Cuando llegás tarde a clase</label><br>
+                      <label><input type="radio" name="q4" value="odaijini"> Al despedirte de alguien enfermo</label><br>
+                      <label><input type="radio" name="q4" value="ayuda"> Para pedir ayuda en una tienda</label><br>
+                      <button class="btn-link" type="submit">Comprobar</button>
+                      <p class="feedback" hidden></p>
+                    </form>
+
+                    <hr class="section-divider" aria-hidden="true">
+
+                    <!-- Mini-quiz 3: Saludo al senpai -->
+                    <form id="quiz-senpai" style="margin-top:8px">
+                      <p class="muted">Llegás al club y saludás a tu senpai por la mañana. ¿Qué forma es la más adecuada?</p>
+                      <label><input type="radio" name="q3" value="ohayou"> おはよう</label><br>
+                      <label><input type="radio" name="q3" value="ohayou-goz"> おはようございます</label><br>
+                      <label><input type="radio" name="q3" value="yoroshiku"> よろしくお願いします</label><br>
+                      <button class="btn-link" type="submit">Comprobar</button>
+                      <p class="feedback" hidden></p>
+                    </form>
+                  </div>
+                </div>
+              </aside>
+            </div><!-- /.content-2col -->
+
+          </div><!-- /.glass -->
+        </div><!-- /.frame -->
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="title">Voces del Anime</div>
+        <p>Prototipo conceptual para aprendizaje de lengua y cultura japonesa a través del anime.</p>
+      </div>
+      <div>
+        <div class="title">Enlaces</div>
+        <ul>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="creditos.html">Créditos</a></li>
+          <li><a href="politica.html">Política de uso educativo</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="title">Acerca de</div>
+        <p>Lengua, cultura y comunidad a través del anime.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    // --- Filtro por chips + búsqueda (solo gestos) ---
+    const chips = document.querySelectorAll('.btn-chip');
+    const input = document.getElementById('filter-input');
+    const cards = Array.from(document.querySelectorAll('.gestures-grid > .card'));
+
+    let activeTag = '*', query = '';
+
+    function applyFilters(){
+      const q = query.trim().toLowerCase();
+      cards.forEach(card=>{
+        const tags = (card.dataset.tags||'').toLowerCase();
+        const text = (card.textContent + ' ' + (card.dataset.keywords||'')).toLowerCase();
+        const matchTag = (activeTag==='*') || tags.split(' ').includes(activeTag);
+        const matchText = q==='' || text.includes(q);
+        card.style.display = (matchTag && matchText) ? '' : 'none';
+      });
+    }
+
+    chips.forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        chips.forEach(c=>c.classList.remove('is-active'));
+        e.currentTarget.classList.add('is-active');
+        activeTag = e.currentTarget.dataset.filter || '*';
+        applyFilters();
+      });
+    });
+
+    if(input){
+      input.addEventListener('input', e=>{
+        query = e.target.value;
+        applyFilters();
+      });
+    }
+
+    // --- Acordeones "Ver ejemplos" (accesible) ---
+    document.addEventListener('click', (e)=>{
+      const t = e.target.closest('[data-toggle]');
+      if(!t) return;
+      e.preventDefault();
+      const more = t.parentElement.querySelector('.more');
+      if(!more) return;
+      const nowHidden = more.hasAttribute('hidden');
+      if(nowHidden){
+        more.removeAttribute('hidden');
+        t.textContent = 'Ocultar ejemplos';
+        t.setAttribute('aria-expanded','true');
+      }else{
+        more.setAttribute('hidden','');
+        t.textContent = 'Ver ejemplos';
+        t.setAttribute('aria-expanded','false');
+      }
+    });
+
+    // --- Mini-quiz 1 ---
+    const quiz1 = document.getElementById('quiz-tpo');
+    if(quiz1){
+      quiz1.addEventListener('submit', e=>{
+        e.preventDefault();
+        const val = (new FormData(quiz1).get('q1')||'');
+        const fb = quiz1.querySelector('.feedback');
+        if(!val){
+          fb.textContent='Elegí una opción.';
+          fb.className='feedback err';
+          fb.hidden=false;
+          return;
+        }
+        if(val==='omiyage'){
+          fb.textContent='¡Correcto! Llevar omiyage es la práctica habitual.';
+          fb.className='feedback ok';
+        }else{
+          fb.textContent='Casi. La opción más alineada a la situación es llevar omiyage.';
+          fb.className='feedback err';
+        }
+        fb.hidden=false;
+      });
+    }
+
+    // --- Mini-quiz 3 handler ---
+    const quiz3 = document.getElementById('quiz-senpai');
+    if(quiz3){
+      quiz3.addEventListener('submit', function(e){
+        e.preventDefault();
+        const val = (new FormData(quiz3).get('q3')||'');
+        const fb = quiz3.querySelector('.feedback');
+        if(!val){
+          fb.textContent='Elegí una opción.';
+          fb.className='feedback err';
+          fb.hidden=false;
+          return;
+        }
+        if(val==='ohayou-goz'){
+          fb.textContent='¡Correcto! Con senpai, “おはようございます” es la forma cortés.';
+          fb.className='feedback ok';
+        }else{
+          fb.textContent='Casi. A un senpai se saluda con “おはようございます”.';
+          fb.className='feedback err';
+        }
+        fb.hidden=false;
+      });
+    }
+
+    // --- Mini-quiz 2: Templo ---
+    const quizT = document.getElementById('quiz-templo');
+    if(quizT){
+      quizT.addEventListener('submit', e=>{
+        e.preventDefault();
+        const val = (new FormData(quizT).get('q2')||'');
+        const fb = quizT.querySelector('.feedback');
+        if(!val){
+          fb.textContent='Elegí una opción.';
+          fb.className='feedback err';
+          fb.hidden=false;
+          return;
+        }
+        if(val==='ritual'){
+          fb.textContent='¡Correcto! La secuencia es 二礼二拍手一礼.';
+          fb.className='feedback ok';
+        }else{
+          fb.textContent='Casi. La secuencia tradicional es 二礼二拍手一礼.';
+          fb.className='feedback err';
+        }
+        fb.hidden=false;
+      });
+    }
+
+    // --- Mini-quiz 4: Salud ---
+    const quizS = document.getElementById('quiz-salud');
+    if(quizS){
+      quizS.addEventListener('submit', e=>{
+        e.preventDefault();
+        const val = (new FormData(quizS).get('q4')||'');
+        const fb = quizS.querySelector('.feedback');
+        if(!val){
+          fb.textContent='Elegí una opción.';
+          fb.className='feedback err';
+          fb.hidden=false;
+          return;
+        }
+        if(val==='odaijini'){
+          fb.textContent='¡Correcto! お大事に se dice al despedirse de alguien enfermo.';
+          fb.className='feedback ok';
+        }else{
+          fb.textContent='Casi. Se usa お大事に al despedirse de alguien enfermo o lesionado.';
+          fb.className='feedback err';
+        }
+        fb.hidden=false;
+      });
+    }
+
+  })();
+  </script>
+</body>
+</html>
