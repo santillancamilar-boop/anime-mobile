@@ -2,1923 +2,1702 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <title>Voces del Anime — App móvil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voces del Anime — Inicio</title>
   <link rel="icon" type="image/png" href="favicon.png" />
 
   <style>
-    :root{
-      --ink:#111827;
-      --muted:#6b7280;
-      --brand:#7c3aed;
-      --brand-soft:#a78bfa;
-      --bg1:#fdf2ff;
-      --bg2:#eef2ff;
-      --card:#fdfbff;
-      --accent:#34d399;
-      --danger:#f97373;
-      --shadow-main:0 18px 40px rgba(15,23,42,.25);
-      --shadow-card:0 10px 26px rgba(15,23,42,.16);
-    }
-    *{box-sizing:border-box;}
-    html,body{margin:0;padding:0;}
-    body{
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:stretch;
-      padding:12px;
-      background:radial-gradient(circle at 0% 0%,#e5d4ff 0,#fdf2ff 30%,#eef2ff 60%,#ecfdf5 100%);
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
-      color:var(--ink);
-      letter-spacing:.01em;
-    }
+  /* --------- Variables --------- */
+  :root{
+    --violeta:#7c3aed;
+    --violeta-claro:#a78bfa;
+    --pasto:#86efac;
+    --azul:#93c5fd;
+    --ink:#111827;
+    --muted:#6b7280;
+    --bg1:#fdf2f8;
+    --bg2:#eef2ff;
+    --bg3:#ecfdf5;
+    --card-bg:rgba(255,255,255,.65);
+    --max:860px;
+  }
 
-    /* ===== Shell tipo teléfono ===== */
-    .phone{
-      width:100%;
-      max-width:430px;
-      background:linear-gradient(180deg,#fefbff,#f5f3ff);
-      border-radius:32px;
-      box-shadow:var(--shadow-main);
-      padding:10px;
-      display:flex;
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{
+    font-family:system-ui,Segoe UI,Inter,sans-serif;
+    background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+    color:var(--ink);
+    background-attachment:fixed;
+  }
+
+  /* --------- Container --------- */
+  .container{
+    width:100%;
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 16px;
+  }
+
+  /* --------- NAV --------- */
+  .nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:rgba(255,255,255,.7);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid #e9d5ff;
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 0;
+  }
+  .brand{
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--violeta);
+  }
+  .tabs{
+    margin-left:auto;
+    display:flex;
+    gap:12px;
+  }
+  .tab{
+    font-size:.9rem;
+    color:var(--violeta);
+    opacity:.7;
+  }
+  .tab.active{
+    font-weight:700;
+    opacity:1;
+    text-decoration:underline;
+  }
+
+  /* --------- CARD HEADER (estilo app) --------- */
+
+  .va-card-head{
+    padding:18px 14px 18px;
+    border-radius:24px;
+    margin-top:16px;
+    background: radial-gradient(circle at 0 0,#fef3ff,#eef2ff 40%,#ffffff 80%);
+    box-shadow:0 6px 16px rgba(124,58,237,.18);
+  }
+
+  .va-handle{
+    width:70px;
+    height:5px;
+    border-radius:999px;
+    background: #e2e8f0;
+    margin:0 auto 14px;
+  }
+
+  .va-head-main{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+
+  .va-head-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .va-app-icon{
+    padding:3px;
+    border-radius:999px;
+    background: radial-gradient(circle at 30% 0,#fde68a,#f9a8d4 40%,#bfdbfe 80%);
+    box-shadow:0 5px 16px rgba(147,51,234,.3);
+  }
+
+  .va-app-icon-inner{
+    width:38px;
+    height:38px;
+    font-size:20px;
+    display:grid;
+    place-items:center;
+    border-radius:999px;
+    background:white;
+  }
+
+  .va-head-text{
+    display:flex;
+    flex-direction:column;
+  }
+  .va-app-name{
+    color:var(--muted);
+    font-size:.8rem;
+  }
+  .va-app-subtitle{
+    font-size:1.03rem;
+    font-weight:800;
+    color:var(--violeta);
+  }
+
+  /* Pill / etiqueta */
+  .va-pill-tag{
+    border:none;
+    padding:8px 14px;
+    border-radius:999px;
+    background:#f4f3ff;
+    color:#4c1d95;
+    font-weight:700;
+    font-size:.78rem;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    box-shadow:0 4px 10px rgba(148,163,184,.35);
+  }
+  .va-pill-dot{
+    width:8px;
+    height:8px;
+    border-radius:999px;
+    background:linear-gradient(135deg,#22c55e,#a3e635);
+  }
+
+  /* --------- HERO --------- */
+  .hero{
+    padding:30px 0 10px;
+    text-align:center;
+  }
+
+  .hero-logo img{
+    max-width:280px;
+    width:100%;
+    height:auto;
+    filter:drop-shadow(0 8px 22px rgba(124,58,237,.25));
+  }
+
+  .lead{
+    font-size:1.1rem;
+    font-weight:700;
+    margin-top:14px;
+    background:linear-gradient(90deg,#7c3aed,#60a5fa);
+    -webkit-background-clip:text;
+    color:transparent;
+    max-width:320px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  /* --------- BLOQUE INTRO / FRAME --------- */
+  .frame{
+    border-radius:22px;
+    padding:1px;
+    background:linear-gradient(135deg,#f0abfc,#93c5fd,#a7f3d0);
+    box-shadow:0 10px 24px rgba(0,0,0,.08);
+    margin:20px auto;
+  }
+
+  .glass{
+    border-radius:22px;
+    background:var(--card-bg);
+    backdrop-filter:blur(10px);
+    padding:32px 26px;
+  }
+
+  .title{
+    font-size:1.4rem;
+    font-weight:900;
+    margin:0 0 14px;
+    color:#4c1d95;
+    position:relative;
+    display:inline-block;
+    padding-bottom:6px;
+  }
+  .title::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-2px;
+    width:70px;
+    height:3px;
+    border-radius:999px;
+    background:linear-gradient(90deg,#a78bfa,#93c5fd,#86efac);
+  }
+
+  p{
+    line-height:1.65;
+    font-size:1rem;
+    color:#4b5563;
+    margin:0 0 14px;
+  }
+
+  /* --------- CARDS FUNCIONES --------- */
+
+  .functions-grid{
+    display:grid;
+    gap:16px;
+    margin-top:20px;
+  }
+
+  .card{
+    background:rgba(255,255,255,.92);
+    border-radius:16px;
+    border:1px solid #e9d5ff;
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+    transition:.25s;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    border-color:#d8b4fe;
+    box-shadow:0 14px 26px rgba(23,15,41,.15);
+  }
+
+  .card-inner{
+    padding:16px;
+  }
+  .card .title{
+    font-size:1.1rem;
+    color:#5b21b6;
+  }
+
+  /* --------- FOOTER --------- */
+
+  .footer{
+    margin-top:40px;
+    padding:26px 0 40px;
+    background:rgba(255,255,255,.55);
+    border-top:1px solid #e9d5ff;
+  }
+  .footer-inner{
+    display:grid;
+    gap:20px;
+    text-align:center;
+  }
+  .footer .title{
+    font-size:1.1rem;
+    font-weight:800;
+    color:#5b21b6;
+  }
+  .footer p, .footer a{
+    font-size:.9rem;
+    color:#4b5563;
+  }
+  .footer a{
+    color:#6d28d9;
+  }
+
+  /* --------- REPRODUCTOR INTERACTIVO --------- */
+
+  .player{
+    background:rgba(255,255,255,.92);
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(15,23,42,.16);
+    padding:16px;
+  }
+
+  .player-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .player-title{
+    font-weight:700;
+    font-size:.95rem;
+    color:#4c1d95;
+  }
+  .player-badge{
+    font-size:.8rem;
+    padding:3px 10px;
+    border-radius:999px;
+    background:#eef2ff;
+    color:#4b5563;
+  }
+
+  .stage{
+    position:relative;
+    background:#000;
+    border-radius:18px;
+    overflow:hidden;
+  }
+  .stage video{
+    width:100%;
+    height:auto;
+    display:block;
+  }
+
+  .center-play{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+  }
+  .btn-big{
+    pointer-events:auto;
+    border:none;
+    border-radius:999px;
+    width:64px;
+    height:64px;
+    font-size:26px;
+    display:grid;
+    place-items:center;
+    background:rgba(255,255,255,.9);
+    box-shadow:0 10px 25px rgba(15,23,42,.45);
+    cursor:pointer;
+  }
+
+  .captions{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:6px;
+    padding:0 10px 10px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    pointer-events:none;
+  }
+  .cap-line{
+    text-align:center;
+    font-size:.85rem;
+    line-height:1.35;
+    text-shadow:0 0 6px rgba(0,0,0,.9);
+    color:#f9fafb;
+  }
+
+  .controls{
+    margin-top:12px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    font-size:.85rem;
+  }
+  .row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+
+  .btn{
+    border:none;
+    border-radius:999px;
+    padding:6px 10px;
+    background:#eef2ff;
+    color:#4b5563;
+    font-size:.8rem;
+    cursor:pointer;
+  }
+  .btn[aria-pressed="true"]{
+    background:#4c1d95;
+    color:#f9fafb;
+  }
+
+  .row.seek{
+    align-items:center;
+  }
+  .time{
+    font-variant-numeric:tabular-nums;
+    font-size:.78rem;
+    color:#4b5563;
+    min-width:2.8rem;
+  }
+  .range{
+    position:relative;
+    flex:1;
+    height:6px;
+    border-radius:999px;
+    background:#e5e7eb;
+    overflow:hidden;
+  }
+  .buffered{
+    position:absolute;
+    inset:0;
+    width:0;
+    background:rgba(156,163,175,.8);
+  }
+  .progress{
+    position:absolute;
+    inset:0;
+    width:0;
+    background:linear-gradient(90deg,#a78bfa,#60a5fa);
+  }
+  .slider{
+    position:absolute;
+    inset:0;
+    width:100%;
+    opacity:0;
+  }
+
+  .vol{
+    flex:1;
+    max-width:140px;
+  }
+  .vol-slider{
+    width:100%;
+  }
+
+  .select{
+    padding:6px 10px;
+    border-radius:999px;
+    border:1px solid #e5e7eb;
+    background:white;
+    font-size:.8rem;
+  }
+
+  .popover{
+    position:absolute;
+    z-index:5;
+    min-width:210px;
+    max-width:260px;
+    background:#fdfcff;
+    border-radius:14px;
+    box-shadow:0 12px 30px rgba(15,23,42,.35);
+    padding:10px 12px;
+    font-size:.8rem;
+    color:#111827;
+    display:none;
+  }
+  .popover .word{
+    font-weight:800;
+    color:#4c1d95;
+  }
+  .popover .hint{
+    font-size:.78rem;
+    color:#4b5563;
+  }
+  .popover .meaning{
+    margin-top:4px;
+    font-size:.8rem;
+  }
+  .popover ul{
+    padding-left:18px;
+    margin:4px 0;
+  }
+  .popover li{
+    margin-bottom:2px;
+  }
+  .ex-ja{
+    font-weight:600;
+  }
+  .ex-es{
+    color:#374151;
+  }
+
+  .word-ja,
+  .word-ro{
+    cursor:pointer;
+  }
+  .hl{
+    background:rgba(147,197,253,.3);
+    border-radius:4px;
+  }
+  .ro-badge{
+    margin-left:6px;
+    padding:1px 6px;
+    border-radius:999px;
+    background:#e0f2fe;
+    font-size:.75rem;
+  }
+
+  @media (min-width:768px){
+    .controls{
       flex-direction:column;
-      position:relative;
-      overflow:hidden;
     }
-    .phone-inner{
-      border-radius:26px;
-      background:linear-gradient(180deg,#fdfcff,#f5f3ff);
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.5);
-      display:flex;
-      flex-direction:column;
-      height:100%;
-    }
-
-    /* Notch fake */
-    .notch{
-      height:16px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding-top:6px;
-    }
-    .notch-bar{
-      width:110px;
-      height:6px;
-      border-radius:999px;
-      background:rgba(15,23,42,.08);
-    }
-
-    /* Top bar */
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:10px 16px 6px;
-    }
-    .topbar-left{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .avatar{
-      width:34px;height:34px;
-      border-radius:999px;
-      background:radial-gradient(circle at 30% 20%,#fef9c3,#f97316);
-      display:flex;align-items:center;justify-content:center;
-      font-size:20px;
-      box-shadow:0 6px 18px rgba(248,113,113,.4);
-    }
-    .top-txt{
-      display:flex;
-      flex-direction:column;
-      font-size:12px;
-    }
-    .top-txt span:first-child{
-      color:var(--muted);
-    }
-    .top-txt span:last-child{
-      font-weight:700;
-      color:#4c1d95;
-      font-size:14px;
-    }
-    .pill-tag{
-      font-size:11px;
-      padding:5px 9px;
-      border-radius:999px;
-      background:rgba(124,58,237,.08);
-      border:1px solid rgba(129,140,248,.5);
-      color:#4c1d95;
-      font-weight:600;
-    }
-
-    /* Scroll principal */
-    .screen{
-      flex:1;
-      overflow-y:auto;
-      padding:0 16px 12px;
-      scrollbar-width:none;
-    }
-    .screen::-webkit-scrollbar{display:none;}
-
-    /* Hero card (logo + resumen) */
-    .card{
-      background:var(--card);
-      border-radius:22px;
-      box-shadow:var(--shadow-card);
-      padding:16px 18px;
-      margin-bottom:16px;
-      border:1px solid rgba(191,219,254,.8);
-      position:relative;
-    }
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:22px;
-      background:radial-gradient(circle at 0 0,rgba(129,140,248,.32),transparent 55%);
-      opacity:.9;
-      mix-blend-mode:soft-light;
-      pointer-events:none;
-    }
-    .card-inner{position:relative;z-index:1;}
-
-    .hero-logo{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:8px;
-    }
-    .hero-logo img{
-      max-width:220px;
-      width:100%;
-      height:auto;
-      filter:drop-shadow(0 8px 22px rgba(124,58,237,.28));
-    }
-    .hero-sub{
-      margin:4px 0 0;
-      font-size:.9rem;
-      color:#4b5563;
-      text-align:center;
-      line-height:1.6;
-    }
-
-    .pill-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:6px;
-      justify-content:center;
-      margin-top:10px;
-    }
-    .pill{
-      font-size:11px;
-      padding:4px 9px;
-      border-radius:999px;
-      background:#eef2ff;
-      color:#4338ca;
-      border:1px solid rgba(129,140,248,.6);
-      font-weight:600;
-    }
-
-    /* Título secciones */
-    .section-title{
-      font-size:15px;
-      font-weight:800;
-      color:#4c1d95;
-      margin:0 0 8px;
-      position:relative;
-      padding-bottom:3px;
-    }
-    .section-title::after{
-      content:"";
-      position:absolute;
-      left:0;bottom:-2px;
-      height:3px;width:60px;
-      border-radius:999px;
-      background:linear-gradient(90deg,#a78bfa,#93c5fd,#6ee7b7);
-    }
-    .section-copy{
-      font-size:13px;
-      color:#4b5563;
-      line-height:1.6;
-      margin:0;
-    }
-
-    /* Card escena */
-    .scene-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:8px;
-      margin-bottom:10px;
-    }
-    .scene-chip{
-      font-size:11px;
-      padding:4px 9px;
-      border-radius:999px;
-      background:#ecfdf5;
-      color:#047857;
-      border:1px solid #bbf7d0;
-      font-weight:600;
-    }
-    .scene-meta{
-      font-size:11px;
-      color:var(--muted);
-      text-align:right;
-    }
-
-    .btn-main{
-      width:100%;
-      margin-top:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:none;
-      background:linear-gradient(135deg,#7c3aed,#6366f1);
-      color:white;
-      font-weight:700;
-      font-size:14px;
-      cursor:pointer;
-      box-shadow:0 10px 26px rgba(79,70,229,.35);
-    }
-    .btn-main:active{transform:translateY(1px);box-shadow:0 6px 18px rgba(79,70,229,.3);}
-
-    /* Player card */
-    .player-card .section-title{margin-bottom:4px;}
-    .player-hint{
-      font-size:11px;
-      color:var(--muted);
-      margin-bottom:8px;
-    }
-
-    /* Reproductor integrado (usamos tu estructura pero adaptada) */
-    .player-shell{
-      border-radius:18px;
-      background:#eef2ff;
-      padding:10px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-    .player-header-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      font-size:12px;
-      color:#4c1d95;
-    }
-    .player-header-row span:last-child{
-      font-weight:700;
-      padding:3px 8px;
-      border-radius:999px;
-      background:#f1f5f9;
-      border:1px solid #e5e7eb;
-    }
-
-    .stage{
-      position:relative;
-      border-radius:16px;
-      overflow:hidden;
-      background:#000;
-      box-shadow:0 10px 24px rgba(15,23,42,.45);
-    }
-    video{
-      width:100%;
-      height:auto;
-      display:block;
-      background:#000;
-    }
-    .center-play{
-      position:absolute;
-      inset:0;
-      display:grid;
-      place-items:center;
-      pointer-events:none;
-    }
-    .center-play button{
-      pointer-events:auto;
-      width:64px;height:64px;
-      border-radius:999px;
-      border:none;
-      background:rgba(0,0,0,.6);
-      color:white;
-      font-size:28px;
-      box-shadow:0 10px 30px rgba(0,0,0,.4);
-    }
-
-    .caption-box{
-      position:absolute;
-      left:0;right:0;bottom:6%;
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-      align-items:center;
-      padding:0 12px;
-      z-index:5;
-      pointer-events:none;
-    }
-    .cap-line{
-      max-width:90%;
-      border-radius:14px;
-      padding:7px 10px;
-      font-size:13px;
-      font-weight:600;
-      line-height:1.4;
-      box-shadow:0 6px 18px rgba(0,0,0,.35);
-      pointer-events:auto;
-    }
-    .cap-ja{background:rgba(52,211,153,.96);}
-    .cap-ro{background:rgba(240,171,252,.96);}
-    .cap-es{background:rgba(147,197,253,.96);}
-    .cap-en{background:rgba(216,180,254,.96);}
-
-    .player-controls{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:8px;
-      font-size:12px;
-    }
-    .pc-row{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-    .pc-btn{
-      border-radius:999px;
-      border:1px solid #dbeafe;
-      background:linear-gradient(180deg,#ffffff,#eef2ff);
-      padding:6px 10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-width:36px;
-      font-size:12px;
-      cursor:pointer;
-      box-shadow:0 6px 16px rgba(15,23,42,.15);
-    }
-    .pc-btn[aria-pressed="true"]{
-      background:#4f46e5;
-      color:white;
-      border-color:#4f46e5;
-    }
-    .pc-time{
-      font-variant-numeric:tabular-nums;
-      color:var(--muted);
-      font-size:11px;
-      min-width:60px;
-      text-align:center;
-    }
-    .pc-range-wrap{
-      position:relative;
-      flex:1;
-      max-width:100%;
-      height:18px;
-      display:flex;
-      align-items:center;
-    }
-    .bar-bg{
-      position:absolute;
-      inset-inline:0;
-      height:4px;
-      border-radius:999px;
-      background:#e5e7eb;
-    }
-    .bar-buffer{
-      position:absolute;
-      left:0;height:4px;border-radius:999px;background:#e0f2fe;width:0%;
-    }
-    .bar-progress{
-      position:absolute;
-      left:0;height:4px;border-radius:999px;
-      background:linear-gradient(90deg,#7c3aed,#60a5fa,#34d399);
-      width:0%;
-    }
-    .pc-range{
-      position:relative;
-      width:100%;
-      -webkit-appearance:none;
-      background:transparent;
-      height:4px;
-    }
-    .pc-range::-webkit-slider-thumb{
-      -webkit-appearance:none;
-      width:14px;height:14px;border-radius:50%;
-      background:#ffffff;border:2px solid #7c3aed;
-      box-shadow:0 0 0 2px rgba(129,140,248,.3);
-    }
-    .pc-range::-moz-range-thumb{
-      width:14px;height:14px;border-radius:50%;
-      background:#ffffff;border:2px solid #7c3aed;
-    }
-
-    .pc-vol-wrap{
-      display:flex;
-      align-items:center;
-      gap:6px;
-      width:100%;
-      justify-content:center;
-    }
-    .pc-vol-range{
-      -webkit-appearance:none;
-      width:70%;
-      height:4px;
-      border-radius:999px;
-      background:#e5e7eb;
-    }
-    .pc-vol-range::-webkit-slider-thumb{
-      -webkit-appearance:none;
-      width:12px;height:12px;border-radius:50%;
-      background:#7c3aed;
-    }
-
-    /* Funciones destacadas */
-    .grid-func{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:10px;
-      margin-top:10px;
-    }
-    .func-card{
-      background:rgba(255,255,255,.9);
-      border-radius:16px;
-      padding:10px 12px;
-      border:1px solid rgba(191,219,254,.9);
-      box-shadow:0 6px 18px rgba(15,23,42,.12);
-      font-size:12px;
-    }
-    .func-title{
-      font-weight:700;
-      color:#4c1d95;
-      margin-bottom:4px;
-      font-size:13px;
-    }
-    .func-text{
-      margin:0;
-      color:#4b5563;
-      line-height:1.5;
-    }
-
-    /* Bottom nav */
-    .bottom-nav{
-      padding:8px 18px 12px;
-      border-top:1px solid rgba(209,213,219,.7);
-      background:linear-gradient(180deg,#f9fafb,#e5e7eb);
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .nav-item{
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:2px;
-      font-size:11px;
-      color:var(--muted);
-    }
-    .nav-icon{
-      width:26px;height:26px;
-      border-radius:999px;
-      display:flex;align-items:center;justify-content:center;
-      background:#e5e7eb;
-    }
-    .nav-item--active .nav-icon{
-      background:linear-gradient(135deg,#7c3aed,#6366f1);
-      color:#ffffff;
-      box-shadow:0 6px 18px rgba(79,70,229,.5);
-    }
-    .nav-item--active span{
-      color:#4c1d95;
-      font-weight:600;
-    }
-
-    @media (min-height:820px){
-      .screen{padding-bottom:20px;}
-    }
+  }
   </style>
 </head>
+
 <body>
-  <div class="phone">
-    <div class="phone-inner">
-      <div class="notch"><div class="notch-bar"></div></div>
 
-      <!-- Top bar -->
-      <header class="topbar">
-        <div class="topbar-left">
-          <div class="avatar">🎧</div>
-          <div class="top-txt">
-            <span>Voces del Anime</span>
-            <span>Aprender desde el anime</span>
-          </div>
-        </div>
-        <div class="pill-tag">Prototipo educativo</div>
-      </header>
-
-      <!-- Contenido scrollable -->
-      <main class="screen">
-        <!-- HERO / Bienvenida -->
-        <section class="card">
-          <div class="card-inner hero-logo">
-            <img src="logo-voces.png" alt="Voces del Anime" />
-            <p class="hero-sub">
-              Empezá a explorar japonés a través de escenas de anime:
-              audio, subtítulos y diccionario en una sola pantalla.
-            </p>
-            <div class="pill-row">
-              <span class="pill">Subtítulos JA · RO · ES · EN</span>
-              <span class="pill">Furigana opcional</span>
-              <span class="pill">Diccionario emergente</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- Card intro + CTA -->
-        <section class="card">
-          <div class="card-inner">
-            <div class="scene-header">
-              <div>
-                <h2 class="section-title">Escena destacada</h2>
-                <p class="section-copy">
-                  Probá la experiencia completa: reproducí una escena,
-                  activá pistas y hacé clic en las palabras japonesas.
-                </p>
-              </div>
-              <div class="scene-meta">
-                <div class="scene-chip">Nivel A2–B1</div>
-                <div>Duración aprox. 0:30</div>
-              </div>
-            </div>
-            <button class="btn-main" type="button"
-                    onclick="document.getElementById('video').scrollIntoView({behavior:'smooth'});">
-              ▶ Ver escena con subtítulos
-            </button>
-          </div>
-        </section>
-
-        <!-- Reproductor -->
-        <section class="card player-card">
-          <div class="card-inner">
-            <h2 class="section-title">Reproductor interactivo</h2>
-            <p class="player-hint">
-              Tocá ▶ para iniciar. Podés alternar pistas, ajustar velocidad y
-              usar el diccionario emergente sobre las palabras japonesas.
-            </p>
-
-            <div class="player-shell" id="player">
-              <div class="player-header-row">
-                <span>Escena 01 · Prototipo</span>
-                <span id="badgeDur">00:00</span>
-              </div>
-
-              <div class="stage">
-                <video id="video" preload="metadata"
-                       playsinline webkit-playsinline poster="poster.jpg">
-                  <source id="src" src="video.mp4" type="video/mp4" />
-                  <!-- Pistas de subtítulo -->
-                  <track id="trk-ja" label="日本語"   kind="subtitles" srclang="ja"      src="subs-ja.vtt" default />
-                  <track id="trk-ro" label="Rōmaji"  kind="subtitles" srclang="ja-Latn" src="subs-ro.vtt" />
-                  <track id="trk-es" label="Español" kind="subtitles" srclang="es"      src="subs-es.vtt" />
-                  <track id="trk-en" label="Inglés"  kind="subtitles" srclang="en"      src="subs-en.vtt" />
-                  Tu navegador no soporta el video.
-                </video>
-
-                <div class="center-play">
-                  <button id="bigPlay" type="button">▶</button>
-                </div>
-
-                <!-- Contenedor donde se dibujan las líneas de subtítulo -->
-                <div class="caption-box" id="captions">
-                  <div class="cap-line cap-ja" id="cap-ja" hidden></div>
-                  <div class="cap-line cap-ro" id="cap-romaji" hidden></div>
-                  <div class="cap-line cap-es" id="cap-es" hidden></div>
-                  <div class="cap-line cap-en" id="cap-en" hidden></div>
-                </div>
-              </div>
-
-              <!-- Controles resumidos (tu JS va a engancharse acá) -->
-              <div class="player-controls" aria-label="Controles de reproducción">
-                <div class="pc-row">
-                  <button class="pc-btn" id="back10" type="button">⟲ 10s</button>
-                  <button class="pc-btn" id="play" type="button"><span id="icon-play">▶</span></button>
-                  <button class="pc-btn" id="fwd10" type="button">10s ⟳</button>
-                </div>
-
-                <div class="pc-row">
-                  <span class="pc-time" id="currentTime">0:00</span>
-                  <div class="pc-range-wrap">
-                    <div class="bar-bg"></div>
-                    <div class="bar-buffer" id="bufferedBar"></div>
-                    <div class="bar-progress" id="progressBar"></div>
-                    <input id="seek" class="pc-range" type="range" min="0" max="1000" value="0" />
-                  </div>
-                  <span class="pc-time" id="duration">0:00</span>
-                </div>
-
-                <div class="pc-row">
-                  <div class="pc-vol-wrap">
-                    <button class="pc-btn" id="mute" type="button">🔊</button>
-                    <input id="volume" class="pc-vol-range" type="range"
-                           min="0" max="1" step="0.01" value="1" />
-                  </div>
-                </div>
-
-                <div class="pc-row">
-                  <select id="speed" class="pc-btn" aria-label="Velocidad">
-                    <option value="0.5">0.5×</option>
-                    <option value="0.75">0.75×</option>
-                    <option value="1" selected>1×</option>
-                    <option value="1.25">1.25×</option>
-                    <option value="1.5">1.5×</option>
-                    <option value="1.75">1.75×</option>
-                    <option value="2">2×</option>
-                  </select>
-                  <button class="pc-btn" id="tog-ja"     type="button" aria-pressed="true">JA</button>
-                  <button class="pc-btn" id="tog-romaji" type="button" aria-pressed="false">RO</button>
-                  <button class="pc-btn" id="tog-es"     type="button" aria-pressed="false">ES</button>
-                  <button class="pc-btn" id="tog-en"     type="button" aria-pressed="false">EN</button>
-                  <button class="pc-btn" id="tog-fg"     type="button" aria-pressed="false">FG</button>
-                  <button class="pc-btn" id="fs"         type="button">⤢</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Funciones destacadas -->
-        <section class="card">
-          <div class="card-inner">
-            <h2 class="section-title">Funciones destacadas</h2>
-            <div class="grid-func">
-              <article class="func-card">
-                <div class="func-title">Subtítulos multilingües</div>
-                <p class="func-text">
-                  Cambiá entre japonés, rōmaji, español e inglés sin detener el video. Ideal para
-                  comparar estructuras y expresiones.
-                </p>
-              </article>
-
-              <article class="func-card">
-                <div class="func-title">FG: Furigana opcional</div>
-                <p class="func-text">
-                  Mostrá lectura solo sobre los kanji cuando lo necesites, para no depender
-                  siempre de los silabarios.
-                </p>
-              </article>
-
-              <article class="func-card">
-                <div class="func-title">Diccionario emergente</div>
-                <p class="func-text">
-                  Tocá una palabra japonesa o en rōmaji y aparece un panel flotante con
-                  lectura, significado, formas y ejemplos.
-                </p>
-              </article>
-
-              <article class="func-card">
-                <div class="func-title">Sincronía JA ⇄ RO</div>
-                <p class="func-text">
-                  Al pasar por el texto, se resalta el fragmento equivalente en japonés
-                  y en rōmaji para fijar correspondencias.
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <!-- Bottom nav tipo app -->
-      <nav class="bottom-nav" aria-label="Navegación principal">
-        <a class="nav-item nav-item--active" href="index-mobile.html">
-          <div class="nav-icon">🏠</div>
-          <span>Inicio</span>
-        </a>
-        <a class="nav-item" href="lengua.html">
-          <div class="nav-icon">あ</div>
-          <span>Lengua</span>
-        </a>
-        <a class="nav-item" href="cultura.html">
-          <div class="nav-icon">🎎</div>
-          <span>Cultura</span>
-        </a>
-        <a class="nav-item" href="comunidad.html">
-          <div class="nav-icon">💬</div>
-          <span>Comunidad</span>
-        </a>
-        <a class="nav-item" href="recursos.html">
-          <div class="nav-icon">📚</div>
-          <span>Recursos</span>
-        </a>
-      </nav>
+<!-- NAV -->
+<div class="nav">
+  <div class="container nav-inner">
+    <span class="brand">Voces del Anime</span>
+    <div class="tabs">
+      <span class="tab active">Inicio</span>
     </div>
   </div>
+</div>
 
-  <script>
-  (function(){
-    const $ = (s)=>document.querySelector(s);
-    const player = $('#player');
-    const video  = $('#video');
-    const srcEl  = $('#src');
+<!-- CARD HEADER -->
+<div class="container">
+  <div class="va-card-head">
+    <div class="va-handle"></div>
 
-    const bigPlay    = $('#bigPlay');
-    const playBtn    = $('#play');
-    const iconPlay   = $('#icon-play');
-    const back10     = $('#back10');
-    const fwd10      = $('#fwd10');
-    const seek       = $('#seek');
-    const progressBar= $('#progressBar');
-    const bufferedBar= $('#bufferedBar');
-    const cur        = $('#currentTime');
-    const dur        = $('#duration');
-    const muteBtn    = $('#mute');
-    const vol        = $('#volume');
-    const speed      = $('#speed');
-    const fs         = $('#fs');
-    const badgeDur   = $('#badgeDur');
+    <div class="va-head-main">
+      <div class="va-head-left">
+        <div class="va-app-icon">
+          <div class="va-app-icon-inner">🎧</div>
+        </div>
+        <div class="va-head-text">
+          <span class="va-app-name">Voces del Anime</span>
+          <span class="va-app-subtitle">Aprender desde el anime</span>
+        </div>
+      </div>
 
-    function formatTime(s){
-      if(!isFinite(s)) return '0:00';
-      const h   = Math.floor(s/3600);
-      const m   = Math.floor((s%3600)/60);
-      const sec = String(Math.floor(s%60)).padStart(2,'0');
-      return (h>0 ? h+':'+String(m).padStart(2,'0') : m) + ':' + sec;
+      <button class="va-pill-tag">
+        <span class="va-pill-dot"></span>
+        Prototipo educativo
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-logo">
+    <img src="logo-voces.png" alt="Voces del Anime">
+  </div>
+  <h2 class="lead">Explorá el japonés desde sus voces.</h2>
+</section>
+
+<!-- INTRO -->
+<section class="container">
+  <div class="frame">
+    <div class="glass">
+      <h2 class="title">Bienvenido</h2>
+      <p>
+        Este prototipo propone aprender japonés usando escenas de anime,
+        combinando <strong>audio</strong>, <strong>subtítulos</strong> y
+        <strong>diccionario</strong>. La idea es entender qué se dice, cómo suena
+        y en qué contexto se usa.
+      </p>
+      <p>
+        Una interfaz simple, pastel y amigable para quienes quieren adentrarse
+        en el idioma japonés desde lo que más les gusta.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- REPRODUCTOR INTERACTIVO -->
+<section class="container">
+  <div class="frame">
+    <div class="glass">
+      <div class="player" id="player" tabindex="0" aria-label="Reproductor de video con subtítulos y diccionario">
+        <div class="player-header">
+          <div class="player-title">Escena demo — Voces del Anime</div>
+          <div class="player-badge" id="badgeDur">00:00</div>
+        </div>
+
+        <div class="stage">
+          <video id="video" preload="metadata" playsinline webkit-playsinline poster="poster.jpg">
+            <source id="src" src="video.mp4" type="video/mp4" />
+            <track id="trk-ja" label="日本語"   kind="subtitles" srclang="ja"      src="subs-ja.vtt" default />
+            <track id="trk-ro" label="Rōmaji"  kind="subtitles" srclang="ja-Latn" src="subs-ro.vtt" />
+            <track id="trk-es" label="Español" kind="subtitles" srclang="es"      src="subs-es.vtt" />
+            <track id="trk-en" label="Inglés"  kind="subtitles" srclang="en"      src="subs-en.vtt" />
+            Tu navegador no soporta la etiqueta <code>video</code>.
+          </video>
+
+          <div class="center-play">
+            <button class="btn-big" id="bigPlay" title="Reproducir">▶</button>
+          </div>
+
+          <div class="captions" id="captions">
+            <div class="cap-line track-ja"     id="cap-ja" hidden></div>
+            <div class="cap-line track-romaji" id="cap-romaji" hidden></div>
+            <div class="cap-line track-es"     id="cap-es" hidden></div>
+            <div class="cap-line track-en"     id="cap-en" hidden></div>
+          </div>
+
+          <!-- Popover diccionario -->
+          <div class="popover" id="popover">
+            <div>
+              <span class="word" id="pv-word">—</span>
+              <span class="hint" id="pv-roma"></span>
+            </div>
+            <div class="hint" id="pv-read">Lectura: —</div>
+            <div class="meaning" id="pv-meaning">Significado: —</div>
+            <div class="hint" id="pv-forms"></div>
+            <div class="hint" id="pv-examples"></div>
+          </div>
+        </div>
+
+        <div class="controls" role="group" aria-label="Controles del reproductor">
+          <div class="row">
+            <button class="btn" id="back10" title="Retroceder 10s">⟲</button>
+            <button class="btn" id="play" title="Reproducir/Pausar"><span id="icon-play">▶</span></button>
+            <button class="btn" id="fwd10" title="Avanzar 10s">⟳</button>
+          </div>
+
+          <div class="row seek" aria-label="Barra de progreso">
+            <div class="time" id="currentTime">0:00</div>
+            <div class="range">
+              <div class="buffered" id="bufferedBar"></div>
+              <div class="progress" id="progressBar"></div>
+              <input id="seek" class="slider" type="range" min="0" max="1000" step="1" value="0" />
+            </div>
+            <div class="time" id="duration">0:00</div>
+          </div>
+
+          <div class="row">
+            <button class="btn" id="mute" title="Silenciar/Activar">🔊</button>
+            <div class="vol">
+              <input id="volume" class="vol-slider" type="range" min="0" max="1" step="0.01" value="1" />
+            </div>
+          </div>
+
+          <div class="row">
+            <select id="speed" class="select" aria-label="Velocidad">
+              <option value="0.5">0.5×</option>
+              <option value="0.75">0.75×</option>
+              <option value="1" selected>1×</option>
+              <option value="1.25">1.25×</option>
+              <option value="1.5">1.5×</option>
+              <option value="1.75">1.75×</option>
+              <option value="2">2×</option>
+            </select>
+
+            <button class="btn" id="tog-ja"      aria-pressed="true"  title="Alternar Japonés">JA</button>
+            <button class="btn" id="tog-romaji"  aria-pressed="false" title="Alternar Rōmaji">RO</button>
+            <button class="btn" id="tog-es"      aria-pressed="false" title="Alternar Español">ES</button>
+            <button class="btn" id="tog-en"      aria-pressed="false" title="Alternar Inglés">EN</button>
+            <button class="btn" id="tog-fg"      aria-pressed="false" title="Furigana en JA">FG</button>
+            <button class="btn" id="fs"          title="Pantalla completa">⤢</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const $ = (s)=>document.querySelector(s);
+  const player=$('#player'), video=$('#video'), srcEl=$('#src');
+
+  const bigPlay=$('#bigPlay'), playBtn=$('#play'), iconPlay=$('#icon-play');
+  const back10=$('#back10'), fwd10=$('#fwd10'), seek=$('#seek'),
+        progressBar=$('#progressBar'), bufferedBar=$('#bufferedBar');
+  const cur=$('#currentTime'), dur=$('#duration'), muteBtn=$('#mute'),
+        vol=$('#volume'), speed=$('#speed'), fs=$('#fs'), badgeDur=$('#badgeDur');
+
+  function formatTime(s){
+    if(!isFinite(s)) return '0:00';
+    const h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sec=String(Math.floor(s%60)).padStart(2,'0');
+    return (h>0? h+':'+String(m).padStart(2,'0'):m)+':'+sec;
+  }
+  video.addEventListener('loadedmetadata',()=>{ dur.textContent=formatTime(video.duration); badgeDur.textContent=formatTime(video.duration); updateBuffered(); });
+
+  function togglePlay(){ (video.paused||video.ended)?video.play():video.pause(); }
+  ;[playBtn, video, bigPlay].forEach(el=>el.addEventListener('click', togglePlay));
+  video.addEventListener('play', ()=>{ iconPlay.textContent='⏸'; bigPlay.style.display='none'; });
+  video.addEventListener('pause', ()=>{ iconPlay.textContent='▶';  bigPlay.style.display='grid'; });
+
+  back10.addEventListener('click', ()=> video.currentTime=Math.max(0, (video.currentTime||0)-10));
+  fwd10 .addEventListener('click', ()=> video.currentTime=Math.min(video.duration||0, (video.currentTime||0)+10));
+
+  function updateTime(){
+    cur.textContent=formatTime(video.currentTime);
+    progressBar.style.width=((video.currentTime/(video.duration||1))*100)+'%';
+    seek.value=Math.round((video.currentTime/(video.duration||1))*1000)||0;
+  }
+  function updateBuffered(){
+    try{
+      if(video.buffered && video.buffered.length){
+        const end=video.buffered.end(video.buffered.length-1);
+        bufferedBar.style.width=((end/(video.duration||1))*100)+'%';
+      }
+    }catch(e){}
+  }
+  video.addEventListener('timeupdate', updateTime);
+  video.addEventListener('progress', updateBuffered);
+  video.addEventListener('loadeddata', updateBuffered);
+  seek.addEventListener('input', ()=>{ video.currentTime=(seek.value/1000)*(video.duration||0); updateTime(); });
+
+  function updateMuteIcon(){
+    const level=video.muted||video.volume===0?0:video.volume;
+    muteBtn.textContent= level===0?'🔇':(level<.5?'🔈':'🔊');
+  }
+  vol.addEventListener('input', ()=>{ video.volume=Number(vol.value); if(video.volume>0) video.muted=false; updateMuteIcon(); });
+  muteBtn.addEventListener('click', ()=>{ video.muted=!video.muted; updateMuteIcon(); });
+  video.addEventListener('volumechange', updateMuteIcon); updateMuteIcon();
+
+  speed.addEventListener('change', ()=>{ video.playbackRate=Number(speed.value); });
+  function toggleFS(){ if(document.fullscreenElement) document.exitFullscreen(); else player.requestFullscreen().catch(()=>{}); }
+  fs.addEventListener('click', toggleFS);
+
+  const capJA=$('#cap-ja'), capRO=$('#cap-romaji'), capES=$('#cap-es'), capEN=$('#cap-en');
+  const trkJA=$('#trk-ja'), trkRO=$('#trk-ro'), trkES=$('#trk-es'), trkEN=$('#trk-en');
+  const togJA=$('#tog-ja'), togRO=$('#tog-romaji'), togES=$('#tog-es'), togEN=$('#tog-en'), togFG=$('#tog-fg');
+
+  const tracks={ ja:trkJA?.track || null, ro:trkRO?.track || null, es:trkES?.track || null, en:trkEN?.track || null };
+  Object.values(tracks).forEach(t=>{ if(t){ try{ t.mode='hidden'; }catch(_){} } });
+
+  function armTrack(el){ if(!el) return; const t=el.track; const ok=()=>renderCue(); if(el.readyState===2) ok(); else el.addEventListener('load', ok, {once:true}); }
+  armTrack(trkJA); armTrack(trkRO); armTrack(trkES); armTrack(trkEN);
+
+  const state={ showJA:true, showRO:false, showES:false, showEN:false, showFG:false };
+  const setToggle=(btn,on)=>btn && btn.setAttribute('aria-pressed', on);
+  function syncToggles(){ setToggle(togJA,state.showJA); setToggle(togRO,state.showRO); setToggle(togES,state.showES); setToggle(togEN,state.showEN); setToggle(togFG,state.showFG); }
+  function rerenderAndClean(){ renderCue(); clearJAHighlight(); clearROHighlight(); refreshPopoverFG(); }
+  syncToggles();
+  togJA && togJA.addEventListener('click', ()=>{ state.showJA=!state.showJA; syncToggles(); rerenderAndClean(); });
+  togRO && togRO.addEventListener('click', ()=>{ state.showRO=!state.showRO; syncToggles(); rerenderAndClean(); });
+  togES && togES.addEventListener('click', ()=>{ state.showES=!state.showES; syncToggles(); rerenderAndClean(); });
+  togEN && togEN.addEventListener('click', ()=>{ state.showEN=!state.showEN; syncToggles(); rerenderAndClean(); });
+  togFG && togFG.addEventListener('click', ()=>{ state.showFG=!state.showFG; syncToggles(); rerenderAndClean(); });
+
+  /* ======== Diccionario ======== */
+  const JA_DICT = {
+    "孫悟飯": {
+      yomi: "そんごはん",
+      gloss: "Son Gohan (nombre propio)",
+      ro: "son gohan",
+      forms: ["悟飯 (abreviado)", "孫悟飯くん (trato infantil)", "孫悟飯さん (trato neutro)"],
+      examples: ["孫悟飯は悟空の息子だ。= Son Gohan es el hijo de Gokū."]
+    },
+    "正しい": {
+      yomi: "ただしい",
+      gloss: "correcto; justo",
+      ro: "tadashii",
+      forms: ["正しく (adv.)", "正しさ (sust.)", "正しくない (neg.)"],
+      examples: ["正しい答えを選ぶ。= Elegir la respuesta correcta.", "正しく生きる。= Vivir con rectitud."]
+    },
+    "こと": {
+      yomi: "こと",
+      gloss: "cosa; hecho; nominalizador",
+      ro: "koto",
+      forms: ["V-ことがある (haber hecho/ocurrido)", "V-ことになる (quedar decidido)", "V-ことにする (decidir hacer)"],
+      examples: ["日本に行ったことがある。= He estado en Japón.", "出発は明日ということになった。= Se decidió salir mañana."]
+    },
+    "ために": {
+      yomi: "ために",
+      gloss: "para; por el bien de / a causa de",
+      ro: "tame ni",
+      forms: ["N のために (por/para N)", "V-辞書形 ために (para ~)"],
+      examples: ["健康のために運動する。= Hago ejercicio por mi salud.", "合格するために勉強する。= Estudio para aprobar."]
+    },
+    "戦う": {
+      yomi: "たたかう",
+      gloss: "pelear; luchar",
+      ro: "tatakau",
+      forms: ["戦って (te-form)", "戦い (sust.)", "戦わない (neg.)", "戦える (potencial)"],
+      examples: ["自由のために戦う。= Luchar por la libertad.", "最後まで戦った。= Luchó hasta el final."]
+    },
+    "罪": {
+      yomi: "つみ",
+      gloss: "pecado; culpa; delito",
+      ro: "tsumi",
+      forms: ["有罪 (culpable)", "無罪 (inocente)", "罪人 (criminal)", "罪悪感 (sentimiento de culpa)"],
+      examples: ["罪を犯す。= Cometer un delito.", "罪悪感を抱く。= Sentir culpa."]
+    },
+    "ではない": {
+      yomi: "ではない",
+      gloss: "no es; negación de だ",
+      ro: "de wa nai",
+      forms: ["じゃない (coloquial)", "ではありません (formal)"],
+      examples: ["それは真実ではない。= Eso no es verdad.", "学生じゃない。= No soy estudiante."]
+    },
+    "話し合い": {
+      yomi: "はなしあい",
+      gloss: "diálogo; discusión",
+      ro: "hanashiai",
+      forms: ["話し合う (verbo)", "話し合いで解決する (resolver por diálogo)"],
+      examples: ["問題を話し合いで解決する。= Resolver un problema mediante diálogo."]
+    },
+    "など": {
+      yomi: "など",
+      gloss: "etc.; cosas como ~; y así",
+      ro: "nado",
+      forms: ["N など (entre otros)", "N や N など (N y N, etc.)"],
+      examples: ["本や雑誌などを読む。= Leer libros, revistas, etc."]
+    },
+    "通用しない": {
+      yomi: "つうようしない",
+      gloss: "no funciona; no surte efecto",
+      ro: "tsūyō shinai",
+      rov: ["tsuuyou shinai"],
+      forms: ["通用する (funcionar; ser válido)", "通用しなかった (pasado neg.)"],
+      examples: ["この手は彼には通用しない。= Esta táctica no funciona con él."]
+    },
+    "相手": {
+      yomi: "あいて",
+      gloss: "oponente; interlocutor; pareja (de juego/conversación)",
+      ro: "aite",
+      forms: ["話し相手 (conversador)", "相手にする (tomar en cuenta/tratar con)"],
+      examples: ["強い相手だ。= Es un oponente fuerte.", "彼を相手にしない。= No le des bola."]
+    },
+    "もいるのだ": {
+      yomi: "もいるのだ",
+      gloss: "también hay/existen (tono explicativo)",
+      ro: "mo iru no da",
+      forms: ["もいるんだ (coloquial)", "もいるんです (cortés)"],
+      examples: ["理解できない人もいるのだ。= También hay gente que no puede entender."],
+      note: "のだ/んだ añade matiz explicativo o enfático."
+    },
+    "いるのだ": {
+      yomi: "いるのだ",
+      gloss: "hay/está (explicativo; seres animados)",
+      ro: "iru no da",
+      forms: ["いるんだ (coloquial)", "いるんです (cortés)"],
+      examples: ["ここに助けてくれる人がいるのだ。= Aquí hay alguien que puede ayudar."],
+      note: "のだ/んだ explica, enfatiza o justifica."
+    },
+    "精神": {
+      yomi: "せいしん",
+      gloss: "espíritu; mente; mentalidad",
+      ro: "seishin",
+      forms: ["精神的 (mental)", "精神力 (fuerza mental)", "精神状態 (estado mental)"],
+      examples: ["精神を鍛える。= Fortalecer el espíritu."]
+    },
+    "光": {
+      yomi: "ひかり",
+      gloss: "luz",
+      ro: "hikari",
+      forms: ["光る (brillar)", "日光 (luz solar)", "光景 (escena; vista)"],
+      examples: ["光が差し込む。= Entra la luz."]
+    },
+    "まま": {
+      yomi: "まま",
+      gloss: "tal cual; manteniendo el estado",
+      ro: "mama",
+      forms: ["N のまま (tal como N)", "V-た まま (quedarse tras V)", "V-ない まま (sin V)"],
+      examples: ["靴のまま入らないで。= No entres con zapatos.", "電気をつけたまま寝た。= Dormí con la luz encendida."],
+      note: "X のまま = 'tal como X'. Mantiene estado/situación."
+    },
+    "自由に": {
+      yomi: "じゆうに",
+      gloss: "libremente",
+      ro: "jiyū ni",
+      rov: ["jiyuu ni"],
+      forms: ["自由 (sust.)", "自由な (adj.)"],
+      examples: ["自由に選んでください。= Elija libremente."]
+    },
+    "解放してやれ": {
+      yomi: "かいほうしてやれ",
+      gloss: "¡libéralo! (benefactivo, tono imperativo)",
+      ro: "kaihō shite yare",
+      rov: ["kaihou shite yare"],
+      forms: ["解放する (liberar)", "〜してやる (hacer por alguien; benefactivo ‘yo→vos/él’)"],
+      examples: ["精神を光のまま自由に解放してやれ。= Libera el espíritu tal como luz, libremente."],
+      note: "してやる: ‘hacerle un favor’ a alguien de estatus similar/inferior; tono cercano."
+    },
+    "気持ち": {
+      yomi: "きもち",
+      gloss: "sentimiento; sensación; ánimo",
+      ro: "kimochi",
+      forms: ["気持ちいい (agradable)", "気持ち悪い (asqueroso/malestar)", "いい気持ち (buen ánimo)", "気持ちになる (sentirse ~)"],
+      examples: ["気持ちが分かる。= Entiendo cómo te sentís.", "気持ちいい風だ。= Es un viento agradable."]
+    },
+    "分かる": {
+      yomi: "わかる",
+      gloss: "entender; comprender",
+      ro: "wakaru",
+      forms: ["分かった (pasado)", "分からない (neg.)", "分かりやすい (fácil de entender)", "分かりにくい (difícil de entender)"],
+      examples: ["少し日本語が分かる。= Entiendo un poco de japonés.", "意味が分からない。= No entiendo el significado."]
+    },
+    "もう": {
+      yomi: "もう",
+      gloss: "ya; más; (frustración) ‘¡basta!’",
+      ro: "mō",
+      rov: ["mou"],
+      forms: ["もうすぐ (muy pronto)", "もう一度 (una vez más)", "もう〜ない (ya no)"],
+      examples: ["もう我慢できない。= Ya no puedo aguantar.", "もうすぐ始まる。= Ya empieza."]
+    },
+    "我慢する": {
+      yomi: "がまんする",
+      gloss: "aguantarse; soportar; contenerse",
+      ro: "gaman suru",
+      forms: ["我慢できる/できない (poder/no poder soportar)", "我慢強い (paciente)"],
+      examples: ["痛みを我慢する。= Soportar el dolor.", "彼は我慢強い。= Es muy paciente."]
+    },
+    "ことはない": {
+      yomi: "ことはない",
+      gloss: "no hace falta; no es necesario / no necesariamente",
+      ro: "koto wa nai",
+      forms: ["V(辞書形)+ことはない (no es necesario V)", "必ずしも〜ということはない (no necesariamente)"],
+      examples: ["心配することはない。= No hace falta preocuparse.", "高いからといって良いということはない。= Que sea caro no significa que sea bueno."]
+    },
+    "のが": {
+      yomi: "のが",
+      gloss: "(nominalizador + が: ‘el hecho de ~’ como sujeto)",
+      ro: "no ga",
+      forms: ["V(辞書形) のが〜 (me/te/le ~ el hecho de V)", "Adj-い のが〜"],
+      examples: ["走るのが好きだ。= Me gusta correr.", "早起きするのが苦手だ。= Se me da mal madrugar."]
+    },
+    "を": {
+      yomi: "を",
+      gloss: "marca de objeto directo; también ruta/espacio atravesado",
+      ro: "o",
+      rov: ["wo"],
+      forms: ["目的語: 水を飲む","経路: 橋を渡る","起点の離脱: 家を出る"],
+      examples: ["パンを食べる。= Comer pan."]
+    },
+    "は": { yomi: "は", gloss: "tema; contraste", ro: "wa",
+      forms:["主題提示: 私は〜","対比: Aは〜が、Bは〜"],
+      examples:["私は学生です。= Yo soy estudiante."] },
+    "が": { yomi: "が", gloss: "sujeto; existencia", ro: "ga",
+      forms:["新情報提示","存在: 庭に猫がいる"],
+      examples:["雨が降っている。= Está lloviendo."] },
+    "に": { yomi: "に", gloss: "tiempo; destino; receptor", ro: "ni",
+      forms:["時間点: 3時に","到着: 学校に行く"],
+      examples:["７時に起きる。= Me levanto a las 7."] },
+    "で": { yomi: "で", gloss: "lugar de acción; medio", ro: "de",
+      forms:["場所: 学校で","手段: バスで行く"],
+      examples:["図書館で読む。= Leer en la biblioteca."] },
+    "と": { yomi: "と", gloss: "y; con; cita", ro: "to",
+      forms:["並列: AとB","引用: 〜と言う"],
+      examples:["家族と住む。= Vivo con mi familia."] },
+    "も": { yomi: "も", gloss: "también; incluso", ro: "mo",
+      forms:["追加: 私も","強調: 一分もない"],
+      examples:["私も行く。= Yo también voy."] },
+    "の": { yomi: "の", gloss: "posesivo; nominalizador", ro: "no",
+      forms:["私の本","名詞化: 勉強するのが好き"],
+      examples:["彼の車。= Su auto."] },
+    "へ": { yomi: "へ", gloss: "hacia (dirección)", ro: "e",
+      examples:["学校へ急ぐ。= Apurarse hacia la escuela."] },
+    "から": { yomi: "から", gloss: "desde; porque", ro: "kara",
+      examples:["雨だから行かない。= No voy porque llueve."] },
+    "まで": { yomi: "まで", gloss: "hasta; incluso", ro: "made",
+      examples:["三時まで勉強する。= Estudio hasta las 3."] },
+    "より": { yomi: "より", gloss: "comparativo ‘más que’", ro: "yori",
+      examples:["昨日より暖かい。= Más cálido que ayer."] }
+  };
+
+  const DICT_KEYS=Object.keys(JA_DICT).sort((a,b)=>b.length-a.length);
+
+  // Segmentación JA priorizando diccionario
+  const segJA = (typeof Intl!=='undefined' && Intl.Segmenter)? new Intl.Segmenter('ja',{granularity:'word'}) : null;
+  function isKanji(ch){ return /[\u3400-\u9FFF]/.test(ch); }
+  function isKana (ch){ return /[\u3040-\u309F\u30A0-\u30FFー]/.test(ch); }
+  const kataToHira = s => s.replace(/[\u30A1-\u30F6]/g, c => String.fromCharCode(c.charCodeAt(0)-0x60));
+
+  function sliceWithDict(line){
+    const out=[]; let i=0;
+    while(i<line.length){
+      let m=null;
+      for(const k of DICT_KEYS){ if(line.startsWith(k,i)){ m=k; break; } }
+      if(m){ const e=JA_DICT[m]; out.push({text:m, dict:e, start:i, end:i+m.length}); i+=m.length; }
+      else{ out.push({text:line[i], start:i, end:i+1}); i++; }
     }
-
-    video.addEventListener('loadedmetadata', ()=>{
-      dur.textContent     = formatTime(video.duration);
-      badgeDur.textContent= formatTime(video.duration);
-      updateBuffered();
-    });
-
-    function togglePlay(){
-      (video.paused || video.ended) ? video.play() : video.pause();
-    }
-    [playBtn, video, bigPlay].forEach(el =>
-      el.addEventListener('click', togglePlay)
-    );
-
-    video.addEventListener('play', ()=>{
-      iconPlay.textContent='⏸';
-      bigPlay.style.display='none';
-    });
-    video.addEventListener('pause', ()=>{
-      iconPlay.textContent='▶';
-      bigPlay.style.display='grid';
-    });
-
-    back10.addEventListener('click', ()=>{
-      video.currentTime = Math.max(0,(video.currentTime||0)-10);
-    });
-    fwd10.addEventListener('click', ()=>{
-      video.currentTime = Math.min(video.duration||0,(video.currentTime||0)+10);
-    });
-
-    function updateTime(){
-      cur.textContent = formatTime(video.currentTime);
-      const ratio = (video.duration||1);
-      progressBar.style.width = ((video.currentTime/ratio)*100)+'%';
-      seek.value = Math.round((video.currentTime/ratio)*1000)||0;
-    }
-    function updateBuffered(){
-      try{
-        if(video.buffered && video.buffered.length){
-          const end = video.buffered.end(video.buffered.length-1);
-          bufferedBar.style.width = ((end/(video.duration||1))*100)+'%';
-        }
-      }catch(e){}
-    }
-
-    video.addEventListener('timeupdate', updateTime);
-    video.addEventListener('progress', updateBuffered);
-    video.addEventListener('loadeddata', updateBuffered);
-
-    seek.addEventListener('input', ()=>{
-      video.currentTime = (seek.value/1000)*(video.duration||0);
-      updateTime();
-    });
-
-    function updateMuteIcon(){
-      const level = video.muted || video.volume===0 ? 0 : video.volume;
-      muteBtn.textContent = level===0?'🔇':(level<.5?'🔈':'🔊');
-    }
-    vol.addEventListener('input', ()=>{
-      video.volume = Number(vol.value);
-      if(video.volume>0) video.muted=false;
-      updateMuteIcon();
-    });
-    muteBtn.addEventListener('click', ()=>{
-      video.muted = !video.muted;
-      updateMuteIcon();
-    });
-    video.addEventListener('volumechange', updateMuteIcon);
-    updateMuteIcon();
-
-    speed.addEventListener('change', ()=>{
-      video.playbackRate = Number(speed.value);
-    });
-
-    function toggleFS(){
-      if(document.fullscreenElement) document.exitFullscreen();
-      else player.requestFullscreen().catch(()=>{});
-    }
-    fs.addEventListener('click', toggleFS);
-
-    /* ======== Subtítulos ======== */
-    const capJA  = $('#cap-ja');
-    const capRO  = $('#cap-romaji');
-    const capES  = $('#cap-es');
-    const capEN  = $('#cap-en');
-    const trkJA  = $('#trk-ja');
-    const trkRO  = $('#trk-ro');
-    const trkES  = $('#trk-es');
-    const trkEN  = $('#trk-en');
-    const togJA  = $('#tog-ja');
-    const togRO  = $('#tog-romaji');
-    const togES  = $('#tog-es');
-    const togEN  = $('#tog-en');
-    const togFG  = $('#tog-fg');
-
-    const tracks = {
-      ja: trkJA?.track || null,
-      ro: trkRO?.track || null,
-      es: trkES?.track || null,
-      en: trkEN?.track || null
+    return out;
+  }
+  function segmentJapanese(line){
+    const raw=sliceWithDict(line);
+    if(!segJA){ return raw.map(p=> ({text:p.text, start:p.start, end:p.end, dict:p.dict||null})); }
+    const out=[]; let buffer='', bStart=null;
+    const flush=()=>{
+      if(!buffer) return;
+      let pos=0;
+      for(const it of segJA.segment(buffer)){
+        const seg=it.segment;
+        const st=bStart + buffer.indexOf(seg,pos);
+        const en=st+seg.length;
+        pos = buffer.indexOf(seg,pos)+seg.length;
+        out.push({text:seg, start:st, end:en, dict:null});
+      }
+      buffer=''; bStart=null;
     };
-    Object.values(tracks).forEach(t=>{
-      if(t){
-        try{ t.mode='hidden'; }catch(_){}
-      }
-    });
-
-    function armTrack(el){
-      if(!el) return;
-      const t  = el.track;
-      const ok = ()=>renderCue();
-      if(el.readyState===2) ok();
-      else el.addEventListener('load', ok, {once:true});
+    for(const p of raw){
+      if(p.dict){ flush(); out.push({text:p.text,start:p.start,end:p.end,dict:p.dict}); }
+      else{ if(buffer===''){ buffer=p.text; bStart=p.start; } else buffer+=p.text; }
     }
-    armTrack(trkJA); armTrack(trkRO); armTrack(trkES); armTrack(trkEN);
+    flush(); return out;
+  }
 
-    const state = {
-      showJA:true,
-      showRO:false,
-      showES:false,
-      showEN:false,
-      showFG:false
-    };
-
-    const setToggle = (btn,on)=>btn && btn.setAttribute('aria-pressed', on);
-    function syncToggles(){
-      setToggle(togJA,state.showJA);
-      setToggle(togRO,state.showRO);
-      setToggle(togES,state.showES);
-      setToggle(togEN,state.showEN);
-      setToggle(togFG,state.showFG);
+  /* ======== Romaji helpers ======== */
+  const PUNC_RE = /^[\s、。．，！？・：；「」『』（）［］【】〈〉《》〔〕…—.,:;!?-]+$/;
+  const ROMA_MAP = {
+    'きゃ':'kya','きゅ':'kyu','きょ':'kyo','しゃ':'sha','しゅ':'shu','しょ':'sho','ちゃ':'cha','ちゅ':'chu','ちょ':'cho',
+    'にゃ':'nya','にゅ':'nyu','にょ':'nyo','ひゃ':'hya','ひゅ':'hyu','ひょ':'hyo','みゃ':'mya','みゅ':'myu','みょ':'myo',
+    'りゃ':'rya','りゅ':'ryu','りょ':'ryo','ぎゃ':'gya','ぎゅ':'gyu','ぎょ':'gyo','じゃ':'ja','じゅ':'ju','じょ':'jo',
+    'びゃ':'bya','びゅ':'byu','びょ':'byo','ぴゃ':'pya','ぴゅ':'pyu','ぴょ':'pyo',
+    'あ':'a','い':'i','う':'u','え':'e','お':'o','か':'ka','き':'ki','く':'ku','け':'ke','こ':'ko',
+    'さ':'sa','し':'shi','す':'su','せ':'se','そ':'so','た':'ta','ち':'chi','つ':'tsu','て':'te','と':'to',
+    'な':'na','に':'ni','ぬ':'nu','ね':'ne','の':'no','は':'ha','ひ':'hi','ふ':'fu','へ':'he','ほ':'ho',
+    'ま':'ma','み':'mi','む':'mu','め':'me','も':'mo','や':'ya','ゆ':'yu','よ':'yo','ら':'ra','り':'ri','る':'ru','れ':'re','ろ':'ro',
+    'わ':'wa','を':'wo','ん':'n','が':'ga','ぎ':'gi','ぐ':'gu','げ':'ge','ご':'go','ざ':'za','じ':'ji','ず':'zu','ぜ':'ze','ぞ':'zo',
+    'だ':'da','ぢ':'ji','づ':'zu','で':'de','ど':'do','ば':'ba','び':'bi','ぶ':'bu','べ':'be','ぼ':'bo','ぱ':'pa','ぴ':'pi','ぷ':'pu','ぺ':'pe','ぽ':'po',
+    'ぁ':'a','ぃ':'i','ぅ':'u','ぇ':'e','ぉ':'o','ゃ':'ya','ゅ':'yu','ょ':'yo','っ':'','ー':''
+  };
+  function hiraToRoma(str){
+    let out=''; for(let i=0;i<str.length;i++){
+      const ch=str[i], next=str[i+1]||'';
+      if(ch==='っ' && next){ const roma = ROMA_MAP[next] || ''; if(roma) out += roma[0]; continue; }
+      const dig=str.slice(i,i+2);
+      if(ROMA_MAP[dig]){ out+=ROMA_MAP[dig]; i++; continue; }
+      out += ROMA_MAP[ch] || ch;
     }
+    return out;
+  }
+  const norm = (s)=>{
+    if(!s) return '';
+    const macPre = {'Ā':'aa','ā':'aa','Ī':'ii','ī':'ii','Ū':'uu','ū':'uu','Ē':'ee','ē':'ee','Ō':'ou','ō':'ou'};
+    s = s.replace(/[ĀāĪīŪūĒēŌō]/g, ch => macPre[ch] || ch)
+         .replace(/a\u0304/gi,'aa').replace(/i\u0304/gi,'ii')
+         .replace(/u\u0304/gi,'uu').replace(/e\u0304/gi,'ee').replace(/o\u0304/gi,'ou');
+    return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+  };
 
-    function rerenderAndClean(){
-      renderCue();
-      clearJAHighlight();
-      clearROHighlight();
-      refreshPopoverFG();
-    }
+  // === Variantes de rōmaji por entrada (usa ro + rov[])
+  function romSetFor(key){
+    const e = JA_DICT[key];
+    if(!e) return [];
+    const list = [e.ro, ...(e.rov || [])].filter(Boolean);
+    return list.map(x => norm(x));
+  }
+  // Variantes de rōmaji -> listas de tokens normalizados
+  function tokenizeRoma(str){ return (str||'').trim().split(/\s+/).map(norm).filter(Boolean); }
+  function romVariantsTokensFor(key){
+    const e = JA_DICT[key];
+    if(!e) return [];
+    const cands = [e.ro, ...(e.rov || []), e.yomi ? hiraToRoma(e.yomi) : ''].filter(Boolean);
+    return cands
+      .map(s => tokenizeRoma(s))
+      .filter(arr => arr.length);
+  }
 
-    syncToggles();
-    togJA && togJA.addEventListener('click', ()=>{
-      state.showJA=!state.showJA; syncToggles(); rerenderAndClean();
-    });
-    togRO && togRO.addEventListener('click', ()=>{
-      state.showRO=!state.showRO; syncToggles(); rerenderAndClean();
-    });
-    togES && togES.addEventListener('click', ()=>{
-      state.showES=!state.showES; syncToggles(); rerenderAndClean();
-    });
-    togEN && togEN.addEventListener('click', ()=>{
-      state.showEN=!state.showEN; syncToggles(); rerenderAndClean();
-    });
-    togFG && togFG.addEventListener('click', ()=>{
-      state.showFG=!state.showFG; syncToggles(); rerenderAndClean();
-    });
+  function makeRubyKanjiOnly(surface, yomi){
+    if(!surface || !yomi) return surface;
+    const y = kataToHira(yomi);
+    const chars = Array.from(surface);
 
-    /* ======== Diccionario / datos ======== */
-    const JA_DICT = {
-      "孫悟飯": {
-        yomi: "そんごはん",
-        gloss: "Son Gohan (nombre propio)",
-        ro: "son gohan",
-        forms: ["悟飯 (abreviado)", "孫悟飯くん (trato infantil)", "孫悟飯さん (trato neutro)"],
-        examples: ["孫悟飯は悟空の息子だ。= Son Gohan es el hijo de Gokū."]
-      },
-      "正しい": {
-        yomi: "ただしい",
-        gloss: "correcto; justo",
-        ro: "tadashii",
-        forms: ["正しく (adv.)", "正しさ (sust.)", "正しくない (neg.)"],
-        examples: ["正しい答えを選ぶ。= Elegir la respuesta correcta.", "正しく生きる。= Vivir con rectitud."]
-      },
-      "こと": {
-        yomi: "こと",
-        gloss: "cosa; hecho; nominalizador",
-        ro: "koto",
-        forms: ["V-ことがある (haber hecho/ocurrido)", "V-ことになる (quedar decidido)", "V-ことにする (decidir hacer)"],
-        examples: ["日本に行ったことがある。= He estado en Japón.", "出発は明日ということになった。= Se decidió salir mañana."]
-      },
-      "ために": {
-        yomi: "ために",
-        gloss: "para; por el bien de / a causa de",
-        ro: "tame ni",
-        forms: ["N のために (por/para N)", "V-辞書形 ために (para ~)"],
-        examples: ["健康のために運動する。= Hago ejercicio por mi salud.", "合格するために勉強する。= Estudio para aprobar."]
-      },
-      "戦う": {
-        yomi: "たたかう",
-        gloss: "pelear; luchar",
-        ro: "tatakau",
-        forms: ["戦って (te-form)", "戦い (sust.)", "戦わない (neg.)", "戦える (potencial)"],
-        examples: ["自由のために戦う。= Luchar por la libertad.", "最後まで戦った。= Luchó hasta el final."]
-      },
-      "罪": {
-        yomi: "つみ",
-        gloss: "pecado; culpa; delito",
-        ro: "tsumi",
-        forms: ["有罪 (culpable)", "無罪 (inocente)", "罪人 (criminal)", "罪悪感 (sentimiento de culpa)"],
-        examples: ["罪を犯す。= Cometer un delito.", "罪悪感を抱く。= Sentir culpa."]
-      },
-      "ではない": {
-        yomi: "ではない",
-        gloss: "no es; negación de だ",
-        ro: "de wa nai",
-        forms: ["じゃない (coloquial)", "ではありません (formal)"],
-        examples: ["それは真実ではない。= Eso no es verdad.", "学生じゃない。= No soy estudiante."]
-      },
-      "話し合い": {
-        yomi: "はなしあい",
-        gloss: "diálogo; discusión",
-        ro: "hanashiai",
-        forms: ["話し合う (verbo)", "話し合いで解決する (resolver por diálogo)"],
-        examples: ["問題を話し合いで解決する。= Resolver un problema mediante diálogo."]
-      },
-      "など": {
-        yomi: "など",
-        gloss: "etc.; cosas como ~; y así",
-        ro: "nado",
-        forms: ["N など (entre otros)", "N や N など (N y N, etc.)"],
-        examples: ["本や雑誌などを読む。= Leer libros, revistas, etc."]
-      },
-      "通用しない": {
-        yomi: "つうようしない",
-        gloss: "no funciona; no surte efecto",
-        ro: "tsūyō shinai",
-        rov: ["tsuuyou shinai"],
-        forms: ["通用する (funcionar; ser válido)", "通用しなかった (pasado neg.)"],
-        examples: ["この手は彼には通用しない。= Esta táctica no funciona con él."]
-      },
-      "相手": {
-        yomi: "あいて",
-        gloss: "oponente; interlocutor; pareja (de juego/conversación)",
-        ro: "aite",
-        forms: ["話し相手 (conversador)", "相手にする (tomar en cuenta/tratar con)"],
-        examples: ["強い相手だ。= Es un oponente fuerte.", "彼を相手にしない。= No le des bola."]
-      },
-      "もいるのだ": {
-        yomi: "もいるのだ",
-        gloss: "también hay/existen (tono explicativo)",
-        ro: "mo iru no da",
-        forms: ["もいるんだ (coloquial)", "もいるんです (cortés)"],
-        examples: ["理解できない人もいるのだ。= También hay gente que no puede entender."],
-        note: "のだ/んだ añade matiz explicativo o enfático."
-      },
-      "いるのだ": {
-        yomi: "いるのだ",
-        gloss: "hay/está (explicativo; seres animados)",
-        ro: "iru no da",
-        forms: ["いるんだ (coloquial)", "いるんです (cortés)"],
-        examples: ["ここに助けてくれる人がいるのだ。= Aquí hay alguien que puede ayudar."],
-        note: "のだ/んだ explica, enfatiza o justifica."
-      },
-      "精神": {
-        yomi: "せいしん",
-        gloss: "espíritu; mente; mentalidad",
-        ro: "seishin",
-        forms: ["精神的 (mental)", "精神力 (fuerza mental)", "精神状態 (estado mental)"],
-        examples: ["精神を鍛える。= Fortalecer el espíritu."]
-      },
-      "光": {
-        yomi: "ひかり",
-        gloss: "luz",
-        ro: "hikari",
-        forms: ["光る (brillar)", "日光 (luz solar)", "光景 (escena; vista)"],
-        examples: ["光が差し込む。= Entra la luz."]
-      },
-      "まま": {
-        yomi: "まま",
-        gloss: "tal cual; manteniendo el estado",
-        ro: "mama",
-        forms: ["N のまま (tal como N)", "V-た まま (quedarse tras V)", "V-ない まま (sin V)"],
-        examples: ["靴のまま入らないで。= No entres con zapatos.", "電気をつけたまま寝た。= Dormí con la luz encendida."],
-        note: "X のまま = 'tal como X'. Mantiene estado/situación."
-      },
-      "自由に": {
-        yomi: "じゆうに",
-        gloss: "libremente",
-        ro: "jiyū ni",
-        rov: ["jiyuu ni"],
-        forms: ["自由 (sust.)", "自由な (adj.)"],
-        examples: ["自由に選んでください。= Elija libremente."]
-      },
-      "解放してやれ": {
-        yomi: "かいほうしてやれ",
-        gloss: "¡libéralo! (benefactivo, tono imperativo)",
-        ro: "kaihō shite yare",
-        rov: ["kaihou shite yare"],
-        forms: ["解放する (liberar)", "〜してやる (hacer por alguien; benefactivo ‘yo→vos/él’)"],
-        examples: ["精神を光のまま自由に解放してやれ。= Libera el espíritu tal como luz, libremente."],
-        note: "してやる: ‘hacerle un favor’ a alguien de estatus similar/inferior; tono cercano."
-      },
-      "気持ち": {
-        yomi: "きもち",
-        gloss: "sentimiento; sensación; ánimo",
-        ro: "kimochi",
-        forms: ["気持ちいい (agradable)", "気持ち悪い (asqueroso/malestar)", "いい気持ち (buen ánimo)", "気持ちになる (sentirse ~)"],
-        examples: ["気持ちが分かる。= Entiendo cómo te sentís.", "気持ちいい風だ。= Es un viento agradable."]
-      },
-      "分かる": {
-        yomi: "わかる",
-        gloss: "entender; comprender",
-        ro: "wakaru",
-        forms: ["分かった (pasado)", "分からない (neg.)", "分かりやすい (fácil de entender)", "分かりにくい (difícil de entender)"],
-        examples: ["少し日本語が分かる。= Entiendo un poco de japonés.", "意味が分からない。= No entiendo el significado."]
-      },
-      "もう": {
-        yomi: "もう",
-        gloss: "ya; más; (frustración) ‘¡basta!’",
-        ro: "mō",
-        rov: ["mou"],
-        forms: ["もうすぐ (muy pronto)", "もう一度 (una vez más)", "もう〜ない (ya no)"],
-        examples: ["もう我慢できない。= Ya no puedo aguantar.", "もうすぐ始まる。= Ya empieza."]
-      },
-      "我慢する": {
-        yomi: "がまんする",
-        gloss: "aguantarse; soportar; contenerse",
-        ro: "gaman suru",
-        forms: ["我慢できる/できない (poder/no poder soportar)", "我慢強い (paciente)"],
-        examples: ["痛みを我慢する。= Soportar el dolor.", "彼は我慢強い。= Es muy paciente."]
-      },
-      "ことはない": {
-        yomi: "ことはない",
-        gloss: "no hace falta; no es necesario / no necesariamente",
-        ro: "koto wa nai",
-        forms: ["V(辞書形)+ことはない (no es necesario V)", "必ずしも〜ということはない (no necesariamente)"],
-        examples: ["心配することはない。= No hace falta preocuparse.", "高いからといって良いということはない。= Que sea caro no significa que sea bueno."]
-      },
-      "のが": {
-        yomi: "のが",
-        gloss: "(nominalizador + が: ‘el hecho de ~’ como sujeto)",
-        ro: "no ga",
-        forms: ["V(辞書形) のが〜 (me/te/le ~ el hecho de V)", "Adj-い のが〜"],
-        examples: ["走るのが好きだ。= Me gusta correr.", "早起きするのが苦手だ。= Se me da mal madrugar."]
-      },
-      "を": {
-        yomi: "を",
-        gloss: "marca de objeto directo; también ruta/espacio atravesado",
-        ro: "o",
-        rov: ["wo"],
-        forms: ["目的語: 水を飲む","経路: 橋を渡る","起点の離脱: 家を出る"],
-        examples: ["パンを食べる。= Comer pan."]
-      },
-      "は": {
-        yomi: "は",
-        gloss: "tema; contraste",
-        ro: "wa",
-        forms:["主題提示: 私は〜","対比: Aは〜が、Bは〜"],
-        examples:["私は学生です。= Yo soy estudiante."]
-      },
-      "が": {
-        yomi: "が",
-        gloss: "sujeto; existencia",
-        ro: "ga",
-        forms:["新情報提示","存在: 庭に猫がいる"],
-        examples:["雨が降っている。= Está lloviendo."]
-      },
-      "に": {
-        yomi: "に",
-        gloss: "tiempo; destino; receptor",
-        ro: "ni",
-        forms:["時間点: 3時に","到着: 学校に行く"],
-        examples:["７時に起きる。= Me levanto a las 7."]
-      },
-      "で": {
-        yomi: "で",
-        gloss: "lugar de acción; medio",
-        ro: "de",
-        forms:["場所: 学校で","手段: バスで行く"],
-        examples:["図書館で読む。= Leer en la biblioteca."]
-      },
-      "と": {
-        yomi: "と",
-        gloss: "y; con; cita",
-        ro: "to",
-        forms:["並列: AとB","引用: 〜と言う"],
-        examples:["家族と住む。= Vivo con mi familia."]
-      },
-      "も": {
-        yomi: "も",
-        gloss: "también; incluso",
-        ro: "mo",
-        forms:["追加: 私も","強調: 一分もない"],
-        examples:["私も行く。= Yo también voy."]
-      },
-      "の": {
-        yomi: "の",
-        gloss: "posesivo; nominalizador",
-        ro: "no",
-        forms:["私の本","名詞化: 勉強するのが好き"],
-        examples:["彼の車。= Su auto."]
-      },
-      "へ": {
-        yomi: "へ",
-        gloss: "hacia (dirección)",
-        ro: "e",
-        examples:["学校へ急ぐ。= Apurarse hacia la escuela."]
-      },
-      "から": {
-        yomi: "から",
-        gloss: "desde; porque",
-        ro: "kara",
-        examples:["雨だから行かない。= No voy porque llueve."]
-      },
-      "まで": {
-        yomi: "まで",
-        gloss: "hasta; incluso",
-        ro: "made",
-        examples:["三時まで勉強する。= Estudio hasta las 3."]
-      },
-      "より": {
-        yomi: "より",
-        gloss: "comparativo ‘más que’",
-        ro: "yori",
-        examples:["昨日より暖かい。= Más cálido que ayer."]
-      }
-    };
-
-    const DICT_KEYS = Object.keys(JA_DICT).sort((a,b)=>b.length-a.length);
-
-    const PUNC_RE = /^[\s、。．，！？・：；「」『』（）［］【】〈〉《》〔〕…—.,:;!?-]+$/;
-
-    const ROMA_MAP = {
-      'きゃ':'kya','きゅ':'kyu','きょ':'kyo','しゃ':'sha','しゅ':'shu','しょ':'sho','ちゃ':'cha','ちゅ':'chu','ちょ':'cho',
-      'にゃ':'nya','にゅ':'nyu','にょ':'nyo','ひゃ':'hya','ひゅ':'hyu','ひょ':'hyo','みゃ':'mya','みゅ':'myu','みょ':'myo',
-      'りゃ':'rya','りゅ':'ryu','りょ':'ryo','ぎゃ':'gya','ぎゅ':'gyu','ぎょ':'gyo','じゃ':'ja','じゅ':'ju','じょ':'jo',
-      'びゃ':'bya','びゅ':'byu','びょ':'byo','ぴゃ':'pya','ぴゅ':'pyu','ぴょ':'pyo',
-      'あ':'a','い':'i','う':'u','え':'e','お':'o','か':'ka','き':'ki','く':'ku','け':'ke','こ':'ko',
-      'さ':'sa','し':'shi','す':'su','せ':'se','そ':'so','た':'ta','ち':'chi','つ':'tsu','て':'te','と':'to',
-      'な':'na','に':'ni','ぬ':'nu','ね':'ne','の':'no','は':'ha','ひ':'hi','ふ':'fu','へ':'he','ほ':'ho',
-      'ま':'ma','み':'mi','む':'mu','め':'me','も':'mo','や':'ya','ゆ':'yu','よ':'yo',
-      'ら':'ra','り':'ri','る':'ru','れ':'re','ろ':'ro',
-      'わ':'wa','を':'wo','ん':'n',
-      'が':'ga','ぎ':'gi','ぐ':'gu','げ':'ge','ご':'go',
-      'ざ':'za','じ':'ji','ず':'zu','ぜ':'ze','ぞ':'zo',
-      'だ':'da','ぢ':'ji','づ':'zu','で':'de','ど':'do',
-      'ば':'ba','び':'bi','ぶ':'bu','べ':'be','ぼ':'bo',
-      'ぱ':'pa','ぴ':'pi','ぷ':'pu','ぺ':'pe','ぽ':'po',
-      'ぁ':'a','ぃ':'i','ぅ':'u','ぇ':'e','ぉ':'o',
-      'ゃ':'ya','ゅ':'yu','ょ':'yo','っ':'','ー':''
-    };
-
-    const segJA = (typeof Intl!=='undefined' && Intl.Segmenter)
-      ? new Intl.Segmenter('ja',{granularity:'word'}) : null;
-
-    function isKanji(ch){ return /[\u3400-\u9FFF]/.test(ch); }
-    function isKana(ch){ return /[\u3040-\u309F\u30A0-\u30FFー]/.test(ch); }
-    const kataToHira = s => s.replace(/[\u30A1-\u30F6]/g, c => String.fromCharCode(c.charCodeAt(0)-0x60));
-
-    function hiraToRoma(str){
-      let out=''; 
-      for(let i=0;i<str.length;i++){
-        const ch=str[i], next=str[i+1]||'';
-        if(ch==='っ' && next){
-          const roma = ROMA_MAP[next] || '';
-          if(roma) out += roma[0];
-          continue;
-        }
-        const dig=str.slice(i,i+2);
-        if(ROMA_MAP[dig]){ out+=ROMA_MAP[dig]; i++; continue; }
-        out += ROMA_MAP[ch] || ch;
-      }
-      return out;
-    }
-
-    const norm = (s)=>{
-      if(!s) return '';
-      const macPre = {
-        'Ā':'aa','ā':'aa','Ī':'ii','ī':'ii','Ū':'uu','ū':'uu',
-        'Ē':'ee','ē':'ee','Ō':'ou','ō':'ou'
-      };
-      s = s.replace(/[ĀāĪīŪūĒēŌō]/g, ch => macPre[ch] || ch)
-           .replace(/a\u0304/gi,'aa')
-           .replace(/i\u0304/gi,'ii')
-           .replace(/u\u0304/gi,'uu')
-           .replace(/e\u0304/gi,'ee')
-           .replace(/o\u0304/gi,'ou');
-      return s.toLowerCase()
-              .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-              .replace(/[^a-z0-9]/g,'');
-    };
-
-    function romSetFor(key){
-      const e = JA_DICT[key];
-      if(!e) return [];
-      const list = [e.ro, ...(e.rov || [])].filter(Boolean);
-      return list.map(x => norm(x));
-    }
-
-    function tokenizeRoma(str){
-      return (str||'').trim().split(/\s+/).map(norm).filter(Boolean);
-    }
-
-    function romVariantsTokensFor(key){
-      const e = JA_DICT[key];
-      if(!e) return [];
-      const cands = [
-        e.ro,
-        ...(e.rov || []),
-        e.yomi ? hiraToRoma(e.yomi) : ''
-      ].filter(Boolean);
-      return cands
-        .map(s => tokenizeRoma(s))
-        .filter(arr => arr.length);
-    }
-
-    function sliceWithDict(line){
-      const out=[]; let i=0;
-      while(i<line.length){
-        let m=null;
-        for(const k of DICT_KEYS){
-          if(line.startsWith(k,i)){ m=k; break; }
-        }
-        if(m){
-          const e=JA_DICT[m];
-          out.push({text:m, dict:e, start:i, end:i+m.length});
-          i+=m.length;
-        }else{
-          out.push({text:line[i], start:i, end:i+1});
-          i++;
-        }
-      }
-      return out;
-    }
-
-    function segmentJapanese(line){
-      const raw = sliceWithDict(line);
-      if(!segJA){
-        return raw.map(p=>({
-          text:p.text, start:p.start, end:p.end, dict:p.dict||null
-        }));
-      }
-      const out=[]; let buffer='', bStart=null;
-      const flush=()=>{
-        if(!buffer) return;
-        let pos=0;
-        for(const it of segJA.segment(buffer)){
-          const seg=it.segment;
-          const st=bStart + buffer.indexOf(seg,pos);
-          const en=st+seg.length;
-          pos=buffer.indexOf(seg,pos)+seg.length;
-          out.push({text:seg,start:st,end:en,dict:null});
-        }
-        buffer=''; bStart=null;
-      };
-      for(const p of raw){
-        if(p.dict){ flush(); out.push({text:p.text,start:p.start,end:p.end,dict:p.dict}); }
-        else{
-          if(buffer===''){ buffer=p.text; bStart=p.start; }
-          else buffer+=p.text;
-        }
-      }
-      flush();
-      return out;
-    }
-
-    function makeRubyKanjiOnly(surface, yomi){
-      if(!surface || !yomi) return surface;
-      const y = kataToHira(yomi);
-      const chars = Array.from(surface);
-
-      let p=0;
-      const anchors=[];
-      for(let i=0;i<chars.length;i++){
-        const ch = chars[i];
-        if(isKana(ch)){
-          const h = kataToHira(ch);
-          const q = y.indexOf(h, p);
-          if(q !== -1){
-            anchors.push({i, q, len:h.length});
-            p = q + h.length;
-          }
-        }
-      }
-
-      let lastY = 0, out='';
-      const findAnchorFrom = idx => anchors.find(a => a.i >= idx);
-
-      for(let i=0;i<chars.length;){
-        if(isKanji(chars[i])){
-          let j=i;
-          while(j<chars.length && isKanji(chars[j])) j++;
-          const next = findAnchorFrom(j);
-          const endY = next ? next.q : y.length;
-          let read = y.slice(lastY,endY);
-          const group = chars.slice(i,j).join('');
-          out += `<ruby><rb>${group}</rb><rt>${read}</rt></ruby>`;
-          lastY = endY;
-          i=j;
-        }else{
-          out += chars[i];
-          const a = anchors.find(a => a.i === i);
-          if(a) lastY = Math.max(lastY,a.q+a.len);
-          i++;
-        }
-      }
-      return out;
-    }
-
-    function rubyKnownWordsInJa(jp){
-      if(!jp) return '';
-      let i=0, out='';
-      while(i<jp.length){
-        let hit=null;
-        for(const k of DICT_KEYS){
-          if(!JA_DICT[k]?.yomi) continue;
-          if(jp.startsWith(k,i)){ hit=k; break; }
-        }
-        if(hit){
-          const y=JA_DICT[hit].yomi;
-          const hasKanji = Array.from(hit).some(isKanji);
-          out += hasKanji ? makeRubyKanjiOnly(hit,y) : hit;
-          i += hit.length;
-        }else{
-          out += jp[i];
-          i++;
-        }
-      }
-      return out;
-    }
-
-    function renderLine(track, el, mode){
-      const show =
-        (state.showJA && mode==='ja') ||
-        (state.showRO && mode==='ro') ||
-        (state.showES && mode==='es') ||
-        (state.showEN && mode==='en');
-
-      if(!show){
-        el.hidden=true; el.innerHTML=''; return;
-      }
-
-      let cue=null;
-      if(track?.activeCues?.length) cue=track.activeCues[0];
-      else if(track?.cues?.length){
-        const t=video.currentTime;
-        for(let i=0;i<track.cues.length;i++){
-          const c = track.cues[i];
-          if(t>=c.startTime && t<=c.endTime){ cue=c; break; }
-        }
-      }
-      if(!cue){ el.hidden=true; el.innerHTML=''; return; }
-
-      el.hidden=false; el.innerHTML='';
-      const lines = cue.text.split(/\r?\n/);
-
-      for(let li=0; li<lines.length; li++){
-        const lineText = lines[li];
-
-        if(mode==='ja'){
-          const tokens = segmentJapanese(lineText);
-          const wrap   = document.createElement('span');
-          wrap.className = 'line-ja';
-          wrap.dataset.text = lineText;
-
-          tokens.forEach((tok, idx)=>{
-            const sp = document.createElement('span');
-            sp.className = 'word-ja';
-
-            const hasKanji = Array.from(tok.text).some(isKanji);
-            if(state.showFG && tok.dict && hasKanji){
-              sp.innerHTML = makeRubyKanjiOnly(tok.text,tok.dict.yomi);
-            }else{
-              sp.textContent = tok.text;
-            }
-
-            sp.dataset.word  = tok.text.trim();
-            sp.dataset.start = tok.start;
-            sp.dataset.end   = tok.end;
-            sp.dataset.idx   = idx;
-
-            if(tok.dict){
-              sp.dataset.dict  = '1';
-              sp.dataset.yomi  = tok.dict.yomi  || '';
-              sp.dataset.gloss = tok.dict.gloss || '';
-              if(tok.dict.ro)   sp.dataset.roma = tok.dict.ro;
-              if(tok.dict.note) sp.dataset.note = tok.dict.note;
-            }else{
-              sp.dataset.dict='0';
-            }
-            wrap.appendChild(sp);
-          });
-
-          el.appendChild(wrap);
-
-        }else if(mode==='ro'){
-          const parts = lineText.split(/(\s+|[.,!?¡¿…:;()\[\]'"-])/).filter(Boolean);
-          let idx=0;
-          parts.forEach(tok=>{
-            if(/\s+|[.,!?¡¿…:;()\[\]'"-]/.test(tok)){
-              el.appendChild(document.createTextNode(tok));
-            }else{
-              const sp = document.createElement('span');
-              sp.className = 'word-ro';
-              sp.textContent = tok;
-              sp.dataset.norm = norm(tok);
-              sp.dataset.idx  = String(idx++);
-              el.appendChild(sp);
-            }
-          });
-
-        }else{
-          el.appendChild(document.createTextNode(lineText));
-        }
-
-        if(li<lines.length-1) el.appendChild(document.createElement('br'));
+    let p=0;
+    const anchors=[];
+    for(let i=0;i<chars.length;i++){
+      const ch = chars[i];
+      if(isKana(ch)){
+        const h = kataToHira(ch);
+        const q = y.indexOf(h, p);
+        if(q !== -1){ anchors.push({i, q, len:h.length}); p = q + h.length; }
       }
     }
 
-    function renderCue(){
-      renderLine(tracks.ja,capJA,'ja');
-      renderLine(tracks.ro,capRO,'ro');
-      renderLine(tracks.es,capES,'es');
-      renderLine(tracks.en,capEN,'en');
+    let lastY = 0, out = '';
+    const findAnchorFrom = (idx) => anchors.find(a => a.i >= idx);
+
+    for(let i=0;i<chars.length;){
+      if(isKanji(chars[i])){
+        let j=i; while(j<chars.length && isKanji(chars[j])) j++;
+        const next = findAnchorFrom(j);
+        const endY = next ? next.q : y.length;
+        let read = y.slice(lastY, endY);
+        const group = chars.slice(i, j).join('');
+        out += `<ruby><rb>${group}</rb><rt>${read}</rt></ruby>`;
+        lastY = endY;
+        i = j;
+      }else{
+        out += chars[i];
+        const a = anchors.find(a => a.i === i);
+        if(a) lastY = Math.max(lastY, a.q + a.len);
+        i++;
+      }
     }
+    return out;
+  }
 
-    Object.values(tracks).forEach(t=>{
-      t && t.addEventListener('cuechange', renderCue);
-    });
-    video.addEventListener('timeupdate', renderCue);
-    video.addEventListener('seeked', renderCue);
-    video.addEventListener('ratechange', renderCue);
-    window.addEventListener('load', renderCue);
-
-    /* ======== Popover + highlight ======== */
-    const pop        = $('#popover');
-    const pvWord     = $('#pv-word');
-    const pvRead     = $('#pv-read');
-    const pvMeaning  = $('#pv-meaning');
-    const pvRoma     = $('#pv-roma');
-    const pvForms    = $('#pv-forms');
-    const pvExamples = $('#pv-examples');
-
-    let popLocked = false;
-    let popAnchor = null;
-    let lastEntry = null;
-
-    function lockPopover(anchor){
-      popLocked=true;
-      popAnchor=anchor||popAnchor;
-      pop.setAttribute('data-locked','1');
-    }
-    function unlockPopover(){
-      popLocked=false;
-      popAnchor=null;
-      pop.removeAttribute('data-locked');
-    }
-
-    function placePopoverAtSpan(span, force=false){
-      if(popLocked && !force) return;
-
-      const stage = document.querySelector('.stage');
-      if(!stage) return;
-
-      const sr = stage.getBoundingClientRect();
-      const r  = span.getBoundingClientRect();
-      const margin = 8;
-
-      pop.style.visibility = 'hidden';
-      pop.style.display    = 'block';
-      const pr = pop.getBoundingClientRect();
-
-      let top = r.top - sr.top - pr.height - 12;
-      if(top < margin) top = r.bottom - sr.top + 12;
-
-      let left = r.left - sr.left + (r.width - pr.width)/2;
-      left = Math.max(margin, Math.min(left, sr.width - pr.width - margin));
-      top  = Math.max(margin, Math.min(top , sr.height - pr.height - margin));
-
-      pop.style.left = left+'px';
-      pop.style.top  = top+'px';
-      pop.style.visibility = 'visible';
-    }
-
-    function repositionIfNeeded(){
-      if(!popLocked || !popAnchor || !document.body.contains(popAnchor)) return;
-      placePopoverAtSpan(popAnchor, true);
-    }
-    window.addEventListener('resize', repositionIfNeeded);
-
-    function longestDictAt(line, pos){
-      let best=null;
+  function rubyKnownWordsInJa(jp){
+    if(!jp) return '';
+    let i=0, out='';
+    while(i<jp.length){
+      let hit=null;
       for(const k of DICT_KEYS){
-        let from=0, i;
-        while((i=line.indexOf(k,from))!==-1){
-          const j=i+k.length;
-          if(i<=pos && pos<j){
-            if(!best || k.length>best.text.length){
-              best = {text:k,start:i,end:j,entry:JA_DICT[k]};
-            }
-          }
-          from=i+1;
-          if(from>=line.length) break;
+        if(!JA_DICT[k]?.yomi) continue;
+        if(jp.startsWith(k,i)){
+          hit=k; break;
         }
       }
-      return best;
-    }
-
-    function roTokens(){ return Array.from(capRO.querySelectorAll('.word-ro')); }
-    function roNorms(){  return roTokens().map(t=>t.dataset.norm || ''); }
-
-    function pickBestRoVariant(entry){
-      const cands = [entry?.ro, ...(entry?.rov||[]), entry?.yomi ? hiraToRoma(entry.yomi) : '']
-        .filter(Boolean).map(s=>s.trim()).filter(Boolean);
-      const norms = roNorms();
-      for(const c of cands){ if(norms.includes(norm(c))) return c; }
-      return cands[0] || '';
-    }
-
-    function clearROHighlight(){
-      capRO.querySelectorAll('.hl').forEach(el=>el.classList.remove('hl'));
-    }
-    function clearJAHighlight(){
-      capJA.querySelectorAll('.hl').forEach(el=>el.classList.remove('hl'));
-    }
-
-    function highlightInRO(romaji){
-      clearROHighlight();
-      if(!state.showRO || !romaji) return;
-
-      const target = norm(romaji);
-      const toks   = Array.from(capRO.querySelectorAll('.word-ro'));
-      const norms  = toks.map(t=>t.dataset.norm||'');
-
-      for(let i=0;i<norms.length;i++){
-        let cat='';
-        for(let j=i;j<norms.length;j++){
-          cat += norms[j];
-          if(cat===target){
-            for(let k=i;k<=j;k++) toks[k].classList.add('hl');
-            return;
-          }
-          if(cat.length>=target.length) break;
-        }
+      if(hit){
+        const y=JA_DICT[hit].yomi;
+        const hasKanji = Array.from(hit).some(isKanji);
+        out += hasKanji ? makeRubyKanjiOnly(hit, y) : hit;
+        i += hit.length;
+      }else{
+        out += jp[i];
+        i++;
       }
-      for(let i=0;i<norms.length;i++){
-        if(norms[i]===target){
-          toks[i].classList.add('hl');
+    }
+    return out;
+  }
+
+  /* ======== Render ======== */
+  function renderLine(track, el, mode){
+    const show = (state.showJA && mode==='ja') ||
+                 (state.showRO && mode==='ro') ||
+                 (state.showES && mode==='es') ||
+                 (state.showEN && mode==='en');
+    if(!show){ el.hidden=true; el.innerHTML=''; return; }
+
+    let cue=null;
+    if(track?.activeCues?.length) cue=track.activeCues[0];
+    else if(track?.cues?.length){
+      const t=video.currentTime;
+      for(let i=0;i<track.cues.length;i++){
+        const c=track.cues[i];
+        if(t>=c.startTime && t<=c.endTime){ cue=c; break; }
+      }
+    }
+    if(!cue){ el.hidden=true; el.innerHTML=''; return; }
+
+    el.hidden=false; el.innerHTML='';
+    const lines = cue.text.split(/\r?\n/);
+
+    for(let li=0; li<lines.length; li++){
+      const lineText = lines[li];
+
+      if(mode==='ja'){
+        const tokens = segmentJapanese(lineText);
+        const wrap = document.createElement('span');
+        wrap.className = 'line-ja';
+        wrap.dataset.text = lineText;
+
+        tokens.forEach((tok, idx) => {
+          const sp = document.createElement('span');
+          sp.className = 'word-ja';
+
+          const hasKanji = Array.from(tok.text).some(isKanji);
+
+          if (state.showFG && tok.dict && hasKanji) {
+            sp.innerHTML = makeRubyKanjiOnly(tok.text, tok.dict.yomi);
+          } else {
+            sp.textContent = tok.text;
+          }
+
+          sp.dataset.word  = tok.text.trim();
+          sp.dataset.start = tok.start;
+          sp.dataset.end   = tok.end;
+          sp.dataset.idx   = idx;
+
+          if (tok.dict) {
+            sp.dataset.dict  = '1';
+            sp.dataset.yomi  = tok.dict.yomi  || '';
+            sp.dataset.gloss = tok.dict.gloss || '';
+            if (tok.dict.ro)   sp.dataset.roma = tok.dict.ro;
+            if (tok.dict.note) sp.dataset.note = tok.dict.note;
+          } else {
+            sp.dataset.dict = '0';
+          }
+
+          wrap.appendChild(sp);
+        });
+
+        el.appendChild(wrap);
+
+      } else if(mode==='ro'){
+        const parts = lineText.split(/(\s+|[.,!?¡¿…:;()\[\]'"-])/).filter(Boolean);
+        let idx=0;
+        parts.forEach(tok=>{
+          if(/\s+|[.,!?¡¿…:;()\[\]'"-]/.test(tok)){
+            el.appendChild(document.createTextNode(tok));
+          }else{
+            const sp=document.createElement('span');
+            sp.className='word-ro';
+            sp.textContent=tok;
+            sp.dataset.norm = norm(tok);
+            sp.dataset.idx = String(idx++);
+            el.appendChild(sp);
+          }
+        });
+
+      } else {
+        el.appendChild(document.createTextNode(lineText));
+      }
+
+      if(li<lines.length-1) el.appendChild(document.createElement('br'));
+    }
+  }
+
+  function renderCue(){
+    renderLine(tracks.ja,capJA,'ja');
+    renderLine(tracks.ro,capRO,'ro');
+    renderLine(tracks.es,capES,'es');
+    renderLine(tracks.en,capEN,'en');
+  }
+  Object.values(tracks).forEach(t=>{ t && t.addEventListener('cuechange', renderCue); });
+  video.addEventListener('timeupdate', renderCue);
+  video.addEventListener('seeked', renderCue);
+  video.addEventListener('ratechange', renderCue);
+  window.addEventListener('load', renderCue);
+
+  /* ======== Popover + highlight ======== */
+  const pop=$('#popover'),
+        pvWord=$('#pv-word'),
+        pvRead=$('#pv-read'),
+        pvMeaning=$('#pv-meaning'),
+        pvRoma=$('#pv-roma'),
+        pvForms=$('#pv-forms'),
+        pvExamples=$('#pv-examples');
+
+  let popLocked=false, popAnchor=null, lastEntry=null;
+
+  function lockPopover(anchor){ popLocked=true; popAnchor=anchor||popAnchor; pop.setAttribute('data-locked','1'); }
+  function unlockPopover(){ popLocked=false; popAnchor=null; pop.removeAttribute('data-locked'); }
+
+  function placePopoverAtSpan(span, force=false){
+    if (popLocked && !force) return;
+
+    const stage = document.querySelector('.stage');
+    if (!stage) return;
+
+    const sr = stage.getBoundingClientRect();
+    const r  = span.getBoundingClientRect();
+    const margin = 8;
+
+    pop.style.visibility = 'hidden';
+    pop.style.display = 'block';
+    const pr = pop.getBoundingClientRect();
+
+    let top  = r.top  - sr.top  - pr.height - 12;
+    if (top < margin) top = r.bottom - sr.top + 12;
+
+    let left = r.left - sr.left + (r.width - pr.width)/2;
+    left = Math.max(margin, Math.min(left, sr.width  - pr.width  - margin));
+    top  = Math.max(margin, Math.min(top , sr.height - pr.height - margin));
+
+    pop.style.left = left + 'px';
+    pop.style.top  = top  + 'px';
+    pop.style.visibility = 'visible';
+  }
+
+  function repositionIfNeeded(){
+    if (!popLocked || !popAnchor || !document.body.contains(popAnchor)) return;
+    placePopoverAtSpan(popAnchor, true);
+  }
+  window.addEventListener('resize', repositionIfNeeded);
+
+  function longestDictAt(line, pos){
+    let best = null;
+    for (const k of DICT_KEYS){
+      let from = 0, i;
+      while ((i = line.indexOf(k, from)) !== -1){
+        const j = i + k.length;
+        if (i <= pos && pos < j){
+          if (!best || k.length > best.text.length){
+            best = { text:k, start:i, end:j, entry: JA_DICT[k] };
+          }
+        }
+        from = i + 1;
+        if (from >= line.length) break;
+      }
+    }
+    return best;
+  }
+
+  function roTokens(){ return Array.from(capRO.querySelectorAll('.word-ro')); }
+  function roNorms(){ return roTokens().map(t=>t.dataset.norm || ''); }
+
+  function pickBestRoVariant(entry){
+    const cands = [entry?.ro, ...(entry?.rov||[]), entry?.yomi ? hiraToRoma(entry.yomi) : '']
+      .filter(Boolean).map(s=>s.trim()).filter(Boolean);
+    const norms = roNorms();
+    for(const c of cands){ if(norms.includes(norm(c))) return c; }
+    return cands[0] || '';
+  }
+
+  function highlightJaFromRo(key){
+    clearJAHighlight();
+    const spans   = Array.from(capJA.querySelectorAll('.word-ja'));
+    const targets = spans.filter(sp => sp.dataset.word === key);
+    if (targets.length){ targets[0].classList.add('hl'); return true; }
+
+    const wrap=capJA.querySelector('.line-ja');
+    const line=wrap?(wrap.dataset.text||''):'';
+    const pos=line.indexOf(key);
+    if(pos>=0){
+      spans.forEach(sp=>{
+        const s=Number(sp.dataset.start)||0, e2=Number(sp.dataset.end)||0;
+        if(s<pos+key.length && e2>pos) sp.classList.add('hl');
+      });
+      return true;
+    }
+    const byRoSet=new Set(romSetFor(key));
+    let did=false;
+    spans.forEach(sp=>{
+      const r=sp.dataset.roma || (sp.dataset.yomi ? hiraToRoma(sp.dataset.yomi) : '');
+      if(r && byRoSet.has(norm(r))){ sp.classList.add('hl'); did=true; }
+    });
+    return did;
+  }
+
+  let roBadgeEl=null;
+  function clearROHighlight(){
+    capRO.querySelectorAll('.hl').forEach(el=>el.classList.remove('hl'));
+    if(roBadgeEl && roBadgeEl.parentNode) roBadgeEl.parentNode.removeChild(roBadgeEl);
+    roBadgeEl=null;
+  }
+  function clearJAHighlight(){ capJA.querySelectorAll('.hl').forEach(el=>el.classList.remove('hl')); }
+
+  function highlightInRO(romaji){
+    clearROHighlight();
+    if(!state.showRO || !romaji) return;
+    const target = norm(romaji);
+    const toks = Array.from(capRO.querySelectorAll('.word-ro'));
+    const norms = toks.map(t=>t.dataset.norm||'');
+
+    for(let i=0;i<norms.length;i++){
+      let cat='';
+      for(let j=i;j<norms.length;j++){
+        cat += norms[j];
+        if(cat===target){
+          for(let k=i;k<=j;k++) toks[k].classList.add('hl');
           return;
         }
-      }
-      let pick=-1, bestLen=0;
-      for(let i=0;i<norms.length;i++){
-        const n=norms[i];
-        if(n.includes(target) || target.includes(n)){
-          if(n.length>bestLen){ pick=i; bestLen=n.length; }
-        }
-      }
-      if(pick!==-1) toks[pick].classList.add('hl');
-    }
-
-    function fillExtra(entry){
-      pvRoma.textContent = entry?.ro ? ` · ${entry.ro}` : '';
-
-      if(entry?.forms?.length){
-        pvForms.innerHTML = `<div><strong>Formas:</strong></div><ul>
-          ${entry.forms.map(f=>`<li>${f}</li>`).join('')}
-        </ul>`;
-      }else{
-        pvForms.innerHTML = '';
-      }
-
-      if(entry?.examples?.length){
-        const items = entry.examples.map(ex=>{
-          const parts = ex.split('=');
-          const ja = parts[0] ? parts[0].trim() : '';
-          const es = parts[1] ? parts[1].trim() : '';
-          const jaOut = state.showFG ? rubyKnownWordsInJa(ja) : ja;
-          return `<li><span class="ex-ja">${jaOut}</span>${es? ` = <span class="ex-es">${es}</span>`:''}</li>`;
-        }).join('');
-        pvExamples.innerHTML = `<div><strong>Ejemplos:</strong></div><ul>${items}</ul>`;
-      }else{
-        pvExamples.innerHTML = '';
+        if(cat.length >= target.length) break;
       }
     }
-
-    function refreshPopoverFG(){
-      if(pop.style.display==='block' && lastEntry){
-        fillExtra(lastEntry);
-        if(popAnchor) placePopoverAtSpan(popAnchor, true);
-      }
+    for(let i=0;i<norms.length;i++){ if(norms[i]===target){ toks[i].classList.add('hl'); return; } }
+    let pick=-1, bestLen=0;
+    for(let i=0;i<norms.length;i++){
+      const n=norms[i];
+      if(n.includes(target) || target.includes(n)){ if(n.length>bestLen){ pick=i; bestLen=n.length; } }
     }
+    if(pick!==-1){ toks[pick].classList.add('hl'); return; }
+    roBadgeEl=document.createElement('span'); roBadgeEl.className='ro-badge'; roBadgeEl.textContent=romaji; capRO.appendChild(roBadgeEl);
+  }
 
-    /* === HOVER: Japonés -> Romaji (si RO visible) === */
-    capJA.addEventListener('mousemove', (e)=>{
-      if(!state.showJA) return;
+  /* === HOVER: Japonés -> Romaji (si RO visible) === */
+  capJA.addEventListener('mousemove', (e)=>{
+    if(!state.showJA) return;
 
-      const t = e.target && e.target.nodeType===3 ? e.target.parentElement : e.target;
-      const jaSpan = t.closest('.word-ja');
+    const t = e.target && e.target.nodeType===3 ? e.target.parentElement : e.target;
+    const jaSpan = t.closest('.word-ja');
 
-      clearJAHighlight();
+    clearJAHighlight();
 
-      if(!jaSpan || PUNC_RE.test(jaSpan.textContent)){
-        if(state.showRO) clearROHighlight();
-        return;
-      }
-
-      jaSpan.classList.add('hl');
-
-      if(!state.showRO) return;
-
-      const wrap     = jaSpan.closest('.line-ja');
-      const lineText = wrap ? (wrap.dataset.text || '') : '';
-      const start    = Number(jaSpan.dataset.start)||0;
-      const end      = Number(jaSpan.dataset.end)||start+(jaSpan.textContent||'').length;
-      const mid      = Math.floor((start+end)/2);
-
-      let surface = jaSpan.dataset.word || (jaSpan.textContent||'').trim();
-      let entry   = (jaSpan.dataset.dict==='1')
-        ? (JA_DICT[surface] || {
-            yomi: jaSpan.dataset.yomi,
-            gloss:jaSpan.dataset.gloss,
-            ro:   jaSpan.dataset.roma
-          })
-        : null;
-
-      if(!entry){
-        const best = longestDictAt(lineText, mid);
-        if(best){ surface = best.text; entry = best.entry; }
-      }
-
-      if(surface && wrap){
-        const jStart = (wrap.dataset.text || '').indexOf(surface);
-        if(jStart>=0){
-          capJA.querySelectorAll('.word-ja').forEach(sp=>{
-            const s = Number(sp.dataset.start)||0;
-            const e2= Number(sp.dataset.end)||0;
-            if(s<jStart+surface.length && e2>jStart) sp.classList.add('hl');
-          });
-        }
-      }
-
-      const romaPreferred = entry ? pickBestRoVariant(entry) : '';
-      const directRoma    = !entry && Array.from(surface).every(isKana)
-        ? hiraToRoma(kataToHira(surface))
-        : '';
-      const romaOut = romaPreferred || directRoma;
-      if(romaOut) highlightInRO(romaOut);
-    });
-
-    capJA.addEventListener('mouseleave', ()=>{
-      clearJAHighlight();
+    if(!jaSpan || PUNC_RE.test(jaSpan.textContent)){
       if(state.showRO) clearROHighlight();
-    });
+      return;
+    }
 
-    /* === HOVER: Romaji -> Japonés === */
-    capRO.addEventListener('mousemove', (e)=>{
-      if(!state.showRO) return;
+    jaSpan.classList.add('hl');
 
-      const roSpan = e.target.closest('.word-ro');
-      clearROHighlight();
+    if(!state.showRO) return;
 
-      if(!roSpan){
-        if(state.showJA) clearJAHighlight();
-        return;
+    const wrap = jaSpan.closest('.line-ja');
+    const lineText = wrap ? (wrap.dataset.text || '') : '';
+    const start = Number(jaSpan.dataset.start)||0;
+    const end   = Number(jaSpan.dataset.end)||start+(jaSpan.textContent||'').length;
+    const mid   = Math.floor((start+end)/2);
+
+    let surface = jaSpan.dataset.word || (jaSpan.textContent||'').trim();
+    let entry = (jaSpan.dataset.dict==='1')
+      ? (JA_DICT[surface] || {
+          yomi: jaSpan.dataset.yomi,
+          ro:   jaSpan.dataset.roma
+        })
+      : null;
+
+    if(!entry){
+      const best = longestDictAt(lineText, mid);
+      if(best){ surface = best.text; entry = best.entry; }
+    }
+
+    if(surface && wrap){
+      const jStart = (wrap.dataset.text || '').indexOf(surface);
+      if(jStart >= 0){
+        capJA.querySelectorAll('.word-ja').forEach(sp=>{
+          const s = Number(sp.dataset.start)||0, e2 = Number(sp.dataset.end)||0;
+          if(s < jStart + surface.length && e2 > jStart) sp.classList.add('hl');
+        });
       }
-      roSpan.classList.add('hl');
-      if(!state.showJA) return;
+    }
 
-      const toks   = roTokens();
-      const norms  = roNorms();
-      const idx    = toks.indexOf(roSpan);
-      const cur    = norms[idx];
+    const romaPreferred = entry ? pickBestRoVariant(entry) : '';
+    const directRoma    = !entry && Array.from(surface).every(isKana)
+      ? hiraToRoma(kataToHira(surface))
+      : '';
+    const romaOut = romaPreferred || directRoma;
+    if (romaOut) highlightInRO(romaOut);
+  });
 
-      const windows=[];
-      for(let w=4; w>=1; w--){
-        const minStart = Math.max(0, idx-(w-1));
-        const maxStart = Math.min(idx, norms.length-w);
-        for(let start=minStart; start<=maxStart; start++){
-          const end = start+w-1;
-          const seg = norms.slice(start,end+1);
-          windows.push({start,end,text:seg.join('')});
-        }
+  capJA.addEventListener('mouseleave', ()=>{
+    clearJAHighlight();
+    if(state.showRO) clearROHighlight();
+  });
+
+  /* === HOVER: Romaji -> Japonés (si JA visible) === */
+  capRO.addEventListener('mousemove', (e)=>{
+    if(!state.showRO) return;
+
+    const roSpan = e.target.closest('.word-ro');
+    clearROHighlight();
+
+    if(!roSpan){
+      if(state.showJA) clearJAHighlight();
+      return;
+    }
+
+    roSpan.classList.add('hl');
+    if(!state.showJA) return;
+
+    const toks   = roTokens();
+    const norms  = roNorms();
+    const idx    = toks.indexOf(roSpan);
+    const cur    = norms[idx];
+
+    const windows = [];
+    for (let w = 4; w >= 1; w--) {
+      const minStart = Math.max(0, idx - (w - 1));
+      const maxStart = Math.min(idx, norms.length - w);
+      for (let start = minStart; start <= maxStart; start++) {
+        const end = start + w - 1;
+        const seg = norms.slice(start, end + 1);
+        windows.push({ start, end, text: seg.join('') });
       }
+    }
 
-      let best=null;
-      for(const winCand of windows){
-        for(const k of DICT_KEYS){
-          const variants = romVariantsTokensFor(k);
-          for(const rvTokens of variants){
-            if(!rvTokens.includes(cur)) continue;
-            if(rvTokens.join('') === winCand.text){
-              if(!best || rvTokens.length>best.rvLen){
-                best = {k, entry:JA_DICT[k], win:winCand, rvLen:rvTokens.length};
-              }
+    let best = null;
+    for (const winCand of windows) {
+      for (const k of DICT_KEYS) {
+        const variants = romVariantsTokensFor(k);
+        for (const rvTokens of variants) {
+          if (!rvTokens.includes(cur)) continue;
+          if (rvTokens.join('') === winCand.text) {
+            if (!best || rvTokens.length > best.rvLen) {
+              best = { k, entry: JA_DICT[k], win: winCand, rvLen: rvTokens.length };
             }
           }
         }
       }
-      if(!best) return;
+    }
+    if (!best) return;
 
-      for(let i=best.win.start;i<=best.win.end;i++){
-        toks[i].classList.add('hl');
-      }
+    for(let i = best.win.start; i <= best.win.end; i++){ toks[i].classList.add('hl'); }
 
-      clearJAHighlight();
-      let found=false;
-      capJA.querySelectorAll('.word-ja').forEach(sp=>{
-        if(sp.dataset.word === best.k){
-          sp.classList.add('hl'); found=true;
-        }
-      });
-
-      if(!found){
-        const wrap = capJA.querySelector('.line-ja');
-        const line = wrap ? (wrap.dataset.text || '') : '';
-        const pos  = line.indexOf(best.k);
-        if(pos>=0){
-          capJA.querySelectorAll('.word-ja').forEach(sp=>{
-            const s=Number(sp.dataset.start)||0;
-            const e2=Number(sp.dataset.end)||0;
-            if(s<pos+best.k.length && e2>pos) sp.classList.add('hl');
-          });
-        }else{
-          const byRoSet = new Set(
-            romVariantsTokensFor(best.k).map(arr=>arr.join(''))
-          );
-          capJA.querySelectorAll('.word-ja').forEach(sp=>{
-            const r = sp.dataset.roma || (sp.dataset.yomi ? hiraToRoma(sp.dataset.yomi) : '');
-            if(r && byRoSet.has(norm(r))) sp.classList.add('hl');
-          });
-        }
-      }
+    clearJAHighlight();
+    let found = false;
+    capJA.querySelectorAll('.word-ja').forEach(sp=>{
+      if(sp.dataset.word === best.k){ sp.classList.add('hl'); found = true; }
     });
 
-    capRO.addEventListener('mouseleave', ()=>{
-      clearROHighlight();
-      if(state.showJA) clearJAHighlight();
-    });
-
-    /* === CLICK EN JAPO === */
-    document.addEventListener('click',(e)=>{
-      if(!state.showJA) return;
-
-      if(!capJA.contains(e.target)){
-        if(!e.target.closest('#popover')){
-          pop.style.display='none';
-          unlockPopover();
-        }
-        return;
+    if(!found){
+      const wrap = capJA.querySelector('.line-ja');
+      const line = wrap ? (wrap.dataset.text || '') : '';
+      const pos  = line.indexOf(best.k);
+      if(pos >= 0){
+        capJA.querySelectorAll('.word-ja').forEach(sp=>{
+          const s = Number(sp.dataset.start)||0, e2 = Number(sp.dataset.end)||0;
+          if(s < pos + best.k.length && e2 > pos) sp.classList.add('hl');
+        });
+      }else{
+        const byRoSet = new Set(romVariantsTokensFor(best.k).map(arr => arr.join('')));
+        capJA.querySelectorAll('.word-ja').forEach(sp=>{
+          const r = sp.dataset.roma || (sp.dataset.yomi ? hiraToRoma(sp.dataset.yomi) : '');
+          if(r && byRoSet.has(norm(r))) sp.classList.add('hl');
+        });
       }
+    }
+  });
 
-      const t    = e.target && e.target.nodeType===3 ? e.target.parentElement : e.target;
-      const span = t.closest('.word-ja');
-      if(!span) return;
-      if(PUNC_RE.test(span.textContent)) return;
+  capRO.addEventListener('mouseleave', ()=>{
+    clearROHighlight();
+    if(state.showJA) clearJAHighlight();
+  });
 
-      const lineWrap = span.closest('.line-ja');
-      const lineText = lineWrap ? (lineWrap.dataset.text || '') : '';
-      const start    = Number(span.dataset.start)||0;
-      const end      = Number(span.dataset.end)||start+(span.textContent||'').length;
-      const pos      = Math.floor((start+end)/2);
+  /* === POPUP Helpers === */
+  function fillExtra(entry){
+    pvRoma.textContent = entry?.ro ? ` · ${entry.ro}` : '';
 
-      let surface = span.dataset.word || (span.textContent||'').trim();
-      let entry   = (span.dataset.dict==='1')
-        ? (JA_DICT[surface] || {
-            yomi:  span.dataset.yomi,
-            gloss: span.dataset.gloss,
-            ro:    span.dataset.roma,
-            note:  span.dataset.note
-          })
-        : null;
+    if (entry?.forms?.length){
+      pvForms.innerHTML = `<div><strong>Formas:</strong></div><ul>
+        ${entry.forms.map(f=>`<li>${f}</li>`).join('')}
+      </ul>`;
+    } else {
+      pvForms.innerHTML = '';
+    }
 
-      if(!entry){
-        const best = longestDictAt(lineText, pos);
-        if(best){ surface=best.text; entry=best.entry; }
+    if (entry?.examples?.length){
+      const items = entry.examples.map(ex=>{
+        const parts = ex.split('=');
+        const ja = parts[0] ? parts[0].trim() : '';
+        const es = parts[1] ? parts[1].trim() : '';
+        const jaOut = state.showFG ? rubyKnownWordsInJa(ja) : ja;
+        return `<li><span class="ex-ja">${jaOut}</span>${es? ` = <span class="ex-es">${es}</span>`:''}</li>`;
+      }).join('');
+      pvExamples.innerHTML = `<div><strong>Ejemplos:</strong></div><ul>${items}</ul>`;
+    } else {
+      pvExamples.innerHTML = '';
+    }
+  }
+
+  function refreshPopoverFG(){
+    if(pop.style.display==='block' && lastEntry){
+      fillExtra(lastEntry);
+      if(popAnchor) placePopoverAtSpan(popAnchor, true);
+    }
+  }
+
+  /* === CLICK EN JAPO === */
+  document.addEventListener('click',(e)=>{
+    if(!state.showJA) return;
+
+    if(!capJA.contains(e.target)) {
+      if(!e.target.closest('#popover')) { pop.style.display='none'; unlockPopover(); }
+      return;
+    }
+
+    const t = e.target && e.target.nodeType===3 ? e.target.parentElement : e.target;
+    const span = t.closest('.word-ja');
+    if(!span) return;
+
+    if (PUNC_RE.test(span.textContent)) return;
+
+    const lineWrap = span.closest('.line-ja');
+    const lineText = lineWrap ? (lineWrap.dataset.text || '') : '';
+    const start = Number(span.dataset.start)||0;
+    const end   = Number(span.dataset.end)||start+(span.textContent||'').length;
+    const pos   = Math.floor((start+end)/2);
+
+    let surface = span.dataset.word || (span.textContent||'').trim();
+
+    let entry = (span.dataset.dict==='1') ? (JA_DICT[surface] || {
+      yomi:  span.dataset.yomi,
+      gloss: span.dataset.gloss,
+      ro:    span.dataset.roma,
+      note:  span.dataset.note
+    }) : null;
+
+    if(!entry){
+      const best = longestDictAt(lineText, pos);
+      if(best){ surface = best.text; entry = best.entry; }
+    }
+
+    pvWord.textContent = surface;
+    pvRead.textContent = 'Lectura: ' + (entry?.yomi || '—');
+    pvMeaning.textContent = 'Significado: ' + (entry?.gloss || '—') + (entry?.note ? ' · Uso: ' + entry.note : '');
+    fillExtra(entry);
+    lastEntry = entry || null;
+
+    unlockPopover();
+    pop.style.display = 'block';
+    placePopoverAtSpan(span);
+    lockPopover(span);
+
+    const romaPreferred = entry ? pickBestRoVariant(entry) : '';
+    const directRoma    = !entry && Array.from(surface).every(isKana)
+      ? hiraToRoma(kataToHira(surface))
+      : '';
+    const romaOut = romaPreferred || directRoma;
+    if (romaOut) highlightInRO(romaOut);
+  }, true);
+
+  /* === CLICK EN ROMAJI === */
+  document.addEventListener('click',(e)=>{
+    if(!state.showRO) return;
+    if(!capRO.contains(e.target)) return;
+
+    const roSpan = e.target.closest('.word-ro'); if(!roSpan) return;
+
+    const toks = Array.from(capRO.querySelectorAll('.word-ro'));
+    const idx  = toks.indexOf(roSpan);
+    const get  = i => (i>=0 && i<toks.length)? toks[i].textContent.trim() : null;
+
+    const candidates = [];
+    for (let w=4; w>=1; w--) {
+      for (let start=idx-(w-1); start<=idx; start++) {
+        if (start<0) continue;
+        const parts=[];
+        for (let k=0;k<w;k++){ const t=get(start+k); if(!t){ parts.length=0; break; } parts.push(t); }
+        if(parts.length) candidates.push({start, end:start+w-1, text:parts.join(' ')});
       }
+    }
 
-      pvWord.textContent   = surface;
-      pvRead.textContent   = 'Lectura: ' + (entry?.yomi || '—');
-      pvMeaning.textContent= 'Significado: ' + (entry?.gloss || '—') +
-                             (entry?.note ? ' · Uso: ' + entry.note : '');
-      fillExtra(entry);
-      lastEntry = entry || null;
-
-      unlockPopover();
-      pop.style.display='block';
-      placePopoverAtSpan(span);
-      lockPopover(span);
-
-      const romaPreferred = entry ? pickBestRoVariant(entry) : '';
-      const directRoma    = !entry && Array.from(surface).every(isKana)
-        ? hiraToRoma(kataToHira(surface))
-        : '';
-      const romaOut = romaPreferred || directRoma;
-      if(romaOut) highlightInRO(romaOut);
-    }, true);
-
-    /* === CLICK EN ROMAJI === */
-    document.addEventListener('click',(e)=>{
-      if(!state.showRO) return;
-      if(!capRO.contains(e.target)) return;
-
-      const roSpan = e.target.closest('.word-ro');
-      if(!roSpan) return;
-
-      const toks = Array.from(capRO.querySelectorAll('.word-ro'));
-      const idx  = toks.indexOf(roSpan);
-      const get  = i => (i>=0 && i<toks.length)? toks[i].textContent.trim() : null;
-
-      const candidates=[];
-      for(let w=4; w>=1; w--){
-        for(let start=idx-(w-1); start<=idx; start++){
-          if(start<0) continue;
-          const parts=[];
-          for(let k=0;k<w;k++){
-            const t = get(start+k);
-            if(!t){ parts.length=0; break; }
-            parts.push(t);
-          }
-          if(parts.length) candidates.push({start,end:start+w-1,text:parts.join(' ')});
-        }
+    let match=null, entry=null, key=null;
+    for (const cand of candidates) {
+      const cn = norm(cand.text);
+      for (const k of DICT_KEYS) {
+        if (romSetFor(k).includes(cn)) { match=cand; entry=JA_DICT[k]; key=k; break; }
       }
+      if (match) break;
+    }
+    if(!entry || !match) return;
 
-      let match=null, entry=null, key=null;
-      for(const cand of candidates){
-        const cn = norm(cand.text);
-        for(const k of DICT_KEYS){
-          if(romSetFor(k).includes(cn)){
-            match=cand; entry=JA_DICT[k]; key=k;
-            break;
-          }
-        }
-        if(match) break;
-      }
-      if(!entry || !match) return;
+    pvWord.textContent = key;
+    pvRead.textContent = 'Lectura: ' + (entry.yomi || '—');
+    pvMeaning.textContent = 'Significado: ' + (entry.gloss || '—') + (entry.note ? ' · Uso: ' + entry.note : '');
+    fillExtra(entry);
+    lastEntry = entry;
 
-      pvWord.textContent   = key;
-      pvRead.textContent   = 'Lectura: ' + (entry.yomi || '—');
-      pvMeaning.textContent= 'Significado: ' + (entry.gloss || '—') +
-                             (entry.note ? ' · Uso: ' + entry.note : '');
-      fillExtra(entry);
-      lastEntry = entry;
+    unlockPopover();
+    pop.style.display = 'block';
+    placePopoverAtSpan(roSpan);
+    lockPopover(roSpan);
 
-      unlockPopover();
-      pop.style.display='block';
-      placePopoverAtSpan(roSpan);
-      lockPopover(roSpan);
+    clearROHighlight();
+    for (let i = match.start; i <= match.end; i++) toks[i].classList.add('hl');
 
-      clearROHighlight();
-      for(let i=match.start;i<=match.end;i++){
-        toks[i].classList.add('hl');
-      }
-
-      if(state.showJA){
-        clearJAHighlight();
-        const spans = Array.from(capJA.querySelectorAll('.word-ja'));
-        const wrap  = capJA.querySelector('.line-ja');
-        const lineText = wrap ? (wrap.dataset.text || '') : '';
-        let jStart = lineText.indexOf(key);
-
-        if(jStart>=0){
-          spans.forEach(sp=>{
-            const s=Number(sp.dataset.start)||0;
-            const e2=Number(sp.dataset.end)||0;
-            if(s<jStart+key.length && e2>jStart) sp.classList.add('hl');
-          });
-        }else{
-          const byRoSet = new Set(romSetFor(key));
-          spans.forEach(sp=>{
-            const r = sp.dataset.roma || (sp.dataset.yomi ? hiraToRoma(sp.dataset.yomi) : '');
-            if(r && byRoSet.has(norm(r))) sp.classList.add('hl');
-          });
-        }
-      }
-    }, true);
-
-    document.addEventListener('mouseleave', ()=>{
+    if (state.showJA) {
       clearJAHighlight();
-      clearROHighlight();
-    }, true);
+      const spans = Array.from(capJA.querySelectorAll('.word-ja'));
+      const wrap = capJA.querySelector('.line-ja');
+      const lineText = wrap ? (wrap.dataset.text || '') : '';
+      let jStart = lineText.indexOf(key);
+      if (jStart >= 0) {
+        spans.forEach(sp=>{
+          const s = Number(sp.dataset.start)||0, e2 = Number(sp.dataset.end)||0;
+          if (s < jStart + key.length && e2 > jStart) sp.classList.add('hl');
+        });
+      } else {
+        const byRoSet = new Set(romSetFor(key));
+        spans.forEach(sp=>{
+          const r = sp.dataset.roma || (sp.dataset.yomi ? hiraToRoma(sp.dataset.yomi) : '');
+          if (r && byRoSet.has(norm(r))) sp.classList.add('hl');
+        });
+      }
+    }
+  }, true);
 
-    renderCue();
-  })();
-  </script>
+  document.addEventListener('mouseleave', ()=>{ clearJAHighlight(); clearROHighlight(); }, true);
+
+  renderCue();
+})();
+</script>
+
+<!-- FUNCIONES DESTACADAS -->
+<section class="container">
+  <div class="frame">
+    <div class="glass">
+      <h2 class="title">Funciones destacadas</h2>
+
+      <div class="functions-grid">
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="title">Subtítulos multilingües</div>
+            <p>JA, RO, ES e IN. Alterná en un toque.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="title">Furigana</div>
+            <p>Mostrá cómo se leen los kanji en contexto.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="title">Diccionario emergente</div>
+            <p>Hacé clic en cualquier palabra para ver su lectura y uso.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="title">Sincronía JA ⇄ RO</div>
+            <p>Al pasar el mouse, ambas pistas se iluminan juntas.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="container footer-inner">
+    <div>
+      <div class="title">Voces del Anime</div>
+      <p>Prototipo conceptual para aprendizaje de japonés desde el anime.</p>
+    </div>
+
+    <div>
+      <div class="title">Enlaces</div>
+      <p><a href="#">Contacto</a> · <a href="#">Créditos</a></p>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
