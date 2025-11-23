@@ -6,11 +6,14 @@
   <title>Voces del Anime — Créditos</title>
   <link rel="icon" type="image/png" href="favicon.png" />
 
-  
   <style>
     :root{
-      --ink:#111827; --brand:#5b21b6; --muted:#6b7280;
-      --grad1:#f0abfc; --grad2:#93c5fd; --grad3:#a7f3d0;
+      --ink:#111827; 
+      --brand:#5b21b6; 
+      --muted:#6b7280;
+      --grad1:#f0abfc; 
+      --grad2:#93c5fd; 
+      --grad3:#a7f3d0;
       --vio:#7c3aed;
       --page-max:1200px;
 
@@ -28,16 +31,19 @@
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
       color:var(--ink);
       background:linear-gradient(135deg,#fdf2f8,#eef2ff,#ecfdf5);
+      background-attachment:fixed;
     }
 
     /* MOBILE-FIRST */
     .container{
-      max-width:480px;
+      max-width:var(--page-max);
       margin:0 auto;
       padding:0 12px;
     }
 
     a{color:#6d28d9;text-decoration:none}
+
+    .muted{color:var(--muted);}
 
     /* NAV mobile */
     .nav{
@@ -97,6 +103,8 @@
       padding:1px;
       background:linear-gradient(135deg,var(--grad1),var(--grad2),var(--grad3));
       box-shadow:0 10px 24px rgba(0,0,0,.08);
+      max-width:var(--page-max);
+      margin-inline:auto;
     }
     .hero-glass{
       border-radius:18px;
@@ -116,6 +124,7 @@
       text-align:center;
       font-weight:600;
       font-size:0.95rem;
+      line-height:1.6;
       background:linear-gradient(90deg,#7c3aed,#60a5fa);
       -webkit-background-clip:text;
       background-clip:text;
@@ -130,6 +139,8 @@
       padding:1px;
       background:linear-gradient(135deg,var(--grad1),var(--grad2),var(--grad3));
       box-shadow:0 10px 24px rgba(0,0,0,.08);
+      max-width:var(--page-max);
+      margin-inline:auto;
     }
     .glass{
       border-radius:18px;
@@ -172,10 +183,16 @@
       border:1px solid #ede9fe;
       border-radius:12px;
       box-shadow:0 6px 18px rgba(0,0,0,.06);
-      transition:transform .2s ease,box-shadow .2s ease;
+      transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
     }
     .card-inner{
       padding:14px 16px;
+    }
+    .card:hover,
+    .card:focus-within{
+      transform:translateY(-4px);
+      box-shadow:0 12px 24px rgba(23,15,41,.14),0 3px 8px rgba(23,15,41,.06);
+      border-color:#d8b4fe;
     }
 
     ul.bullets{
@@ -210,9 +227,11 @@
       display:grid;
       gap:14px;
       grid-template-columns:1fr;
-      padding:16px 0 20px;
+      padding:16px 12px 20px;
       font-size:0.92rem;
       color:#374151;
+      max-width:var(--page-max);
+      margin-inline:auto;
     }
     .footer .title{
       font-weight:800;
@@ -223,8 +242,7 @@
 
     /* --- TABLET / DESKTOP --- */
     @media (min-width:720px){
-
-      .container{max-width:var(--page-max);padding:0 16px}
+      .container{padding:0 16px}
 
       .tabs{
         width:auto;
@@ -237,7 +255,7 @@
       .hero-glass{padding:28px 32px}
       .hero h1{font-size:clamp(28px,4vw,44px)}
 
-      .frame .glass{padding:28px}
+      .glass{padding:28px}
 
       .credits-grid{
         grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -287,39 +305,49 @@
 
     <!-- CONTENIDO -->
     <section class="section">
-      <div class="frame">
-        <div class="glass">
-          <div class="credits-grid">
+      <div class="container">
+        <div class="frame">
+          <div class="glass">
+            <div class="credits-grid">
 
-            <div class="card"><div class="card-inner">
-              <div class="title">Diseño y Contenido</div>
-              <p>Camila Santillán</p>
-              <p class="muted">UI pastel, arquitectura multipágina, glosarios.</p>
-            </div></div>
-
-            <div class="card"><div class="card-inner">
-              <div class="title">Asesoría Académica</div>
-              <p>Prof. Andrés Duarte Loza</p>
-              <p class="muted">Revisión del marco teórico y acompañamiento didáctico.</p>
-            </div></div>
-
-            <div class="card"><div class="card-inner">
-              <div class="title">Fuentes y Materiales</div>
-              <ul class="bullets">
-                <li>Fundación Japón — Minato / Marugoto</li>
-                <li>UNESCO — Competencias interculturales</li>
-                <li>Glosarios temáticos y guías de mediación pedagógica</li>
-              </ul>
-            </div></div>
-
-            <!-- FULL WIDTH -->
-            <div class="card card--full">
-              <div class="card-inner">
-                <div class="title">Agradecimientos</div>
-                <p>A docentes y compañeros/as que aportaron ideas y comentarios.</p>
+              <div class="card">
+                <div class="card-inner">
+                  <div class="title">Diseño y contenido</div>
+                  <p>Camila Santillán</p>
+                  <p class="muted">UI pastel, arquitectura multipágina, selección de escenas y glosarios.</p>
+                </div>
               </div>
-            </div>
 
+              <div class="card">
+                <div class="card-inner">
+                  <div class="title">Asesoría académica</div>
+                  <p>Prof. Andrés Duarte Loza</p>
+                  <p class="muted">Revisión del marco teórico y acompañamiento didáctico.</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-inner">
+                  <div class="title">Fuentes y materiales</div>
+                  <ul class="bullets">
+                    <li>Fundación Japón — Minato / Marugoto.</li>
+                    <li>UNESCO — Competencias interculturales.</li>
+                    <li>Glosarios temáticos y guías de mediación pedagógica.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- FULL WIDTH -->
+              <div class="card card--full">
+                <div class="card-inner">
+                  <div class="title">Agradecimientos</div>
+                  <p>
+                    A docentes y compañeros/as que aportaron ideas, comentarios y motivación para dar forma a este prototipo.
+                  </p>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
@@ -329,7 +357,7 @@
 
   <!-- FOOTER -->
   <div class="footer">
-    <div class="container footer-inner">
+    <div class="footer-inner">
       <div>
         <div class="title">Voces del Anime</div>
         <p>Prototipo conceptual para aprendizaje de lengua y cultura japonesa a través del anime.</p>
